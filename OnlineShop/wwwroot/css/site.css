@@ -1,0 +1,1172 @@
+/* ============================================
+   HÉRITAGE - Old Money Quiet Luxury Design System
+   ============================================ */
+
+/* ============================================
+   1. GOOGLE FONTS IMPORT
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap');
+
+/* ============================================
+   2. CSS VARIABLES - Color Palette
+   ============================================ */
+:root {
+  --color-ivory: #FAF8F5;        /* Background principal */
+  --color-ecru: #E8E4DD;         /* Carduri, secțiuni alternate */
+  --color-warm-black: #1A1A18;   /* Text principal */
+  --color-matte-gold: #B8A88A;   /* Accente, hover states, butoane */
+  --color-stone: #9C958B;        /* Text secundar, placeholders */
+  --color-white: #FFFFFF;        /* Fundal carduri produse */
+  
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Spacing */
+  --spacing-section: 80px;
+  --spacing-section-mobile: 48px;
+  --spacing-element: 24px;
+  --spacing-grid: 32px;
+  
+  /* Transitions */
+  --transition-base: 0.3s ease;
+  --transition-fast: 0.2s ease;
+  
+  /* Borders */
+  --border-radius: 0;
+  --border-radius-small: 2px;
+  --border-width: 1px;
+  --border-color: var(--color-ecru);
+  
+  /* Shadows */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* ============================================
+   3. RESET & BASE STYLES
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-warm-black);
+  background-color: var(--color-ivory);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   4. TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-element);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 42px;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: var(--spacing-element);
+  font-weight: 300;
+}
+
+small, .small {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-stone);
+}
+
+/* Buttons typography */
+.btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--border-radius);
+  transition: var(--transition-base);
+  padding: 16px 32px;
+  border: none;
+}
+
+/* ============================================
+   5. LAYOUT & CONTAINER
+   ============================================ */
+.container {
+  max-width: 1200px;
+}
+
+main {
+  padding: var(--spacing-section-mobile) 0;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: var(--spacing-section) 0;
+  }
+}
+
+section {
+  margin-bottom: var(--spacing-section-mobile);
+}
+
+@media (min-width: 768px) {
+  section {
+    margin-bottom: var(--spacing-section);
+  }
+}
+
+/* ============================================
+   6. NAVBAR
+   ============================================ */
+.navbar {
+  background-color: var(--color-ivory);
+  height: 72px;
+  padding: 0;
+  border-bottom: var(--border-width) solid var(--border-color);
+  box-shadow: none;
+}
+
+.navbar-brand {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-warm-black) !important;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-brand:hover {
+  color: var(--color-warm-black) !important;
+}
+
+.navbar-nav .nav-link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-warm-black) !important;
+  padding: 0.5rem 1rem !important;
+  transition: var(--transition-base);
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--color-matte-gold) !important;
+}
+
+.navbar-toggler {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 8px 12px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(26, 26, 24, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='1.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Search icon and cart icon */
+.navbar .fa-search,
+.navbar .fa-shopping-cart,
+.navbar .fa-heart {
+  stroke-width: 1.5px;
+  color: var(--color-warm-black);
+}
+
+/* Dropdown menu */
+.navbar .dropdown-menu {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-subtle);
+  padding: 8px 0;
+  margin-top: 8px;
+  background-color: var(--color-white);
+}
+
+.navbar .dropdown-item {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-warm-black);
+  padding: 10px 20px;
+  transition: var(--transition-base);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: var(--color-ecru);
+  color: var(--color-warm-black);
+}
+
+.navbar .dropdown-header {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-stone);
+  padding: 8px 20px;
+}
+
+/* Cart and wishlist badges */
+.cart-badge,
+.wishlist-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background-color: var(--color-matte-gold) !important;
+  color: var(--color-white) !important;
+  border-radius: 10px;
+}
+
+/* ============================================
+   7. BUTTONS
+   ============================================ */
+/* Primary Button */
+.btn-primary {
+  background-color: var(--color-warm-black);
+  color: var(--color-ivory);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 16px 32px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: var(--transition-base);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-matte-gold);
+  color: var(--color-ivory);
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/* Secondary Button */
+.btn-secondary,
+.btn-outline-primary,
+.btn-outline-secondary {
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-warm-black);
+  color: var(--color-warm-black);
+  border-radius: var(--border-radius);
+  padding: 16px 32px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: var(--transition-base);
+}
+
+.btn-secondary:hover,
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
+  background-color: var(--color-warm-black);
+  color: var(--color-ivory);
+  border-color: var(--color-warm-black);
+}
+
+.btn-secondary:focus,
+.btn-outline-primary:focus,
+.btn-outline-secondary:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/* Small buttons */
+.btn-sm {
+  padding: 12px 24px;
+  font-size: 12px;
+}
+
+/* Remove all Bootstrap default button colors */
+.btn-danger {
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-warm-black);
+  color: var(--color-warm-black);
+}
+
+.btn-danger:hover {
+  background-color: var(--color-warm-black);
+  color: var(--color-ivory);
+}
+
+.btn-success,
+.btn-warning,
+.btn-info {
+  background-color: transparent;
+  border: var(--border-width) solid var(--color-warm-black);
+  color: var(--color-warm-black);
+}
+
+.btn-success:hover,
+.btn-warning:hover,
+.btn-info:hover {
+  background-color: var(--color-warm-black);
+  color: var(--color-ivory);
+}
+
+/* ============================================
+   8. CARDS - PRODUCT CARDS
+   ============================================ */
+.card {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--color-white);
+  box-shadow: none;
+  transition: var(--transition-base);
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--color-matte-gold);
+  box-shadow: none;
+  transform: none;
+}
+
+.product-card {
+  padding: 0;
+}
+
+.product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background-color: var(--color-ecru);
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-base);
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.02);
+}
+
+.product-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-ecru);
+  color: var(--color-stone);
+}
+
+/* Product card body */
+.product-card .card-body {
+  padding: 20px;
+}
+
+.product-card .card-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-warm-black);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.product-card .card-title a {
+  color: var(--color-warm-black);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.product-card .card-title a:hover {
+  color: var(--color-matte-gold);
+}
+
+/* Brand name in product card */
+.product-brand {
+  font-family: var(--font-body);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-stone);
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Price in product card */
+.product-price {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-warm-black);
+}
+
+/* Product overlay (quick actions) */
+.product-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(26, 26, 24, 0.8));
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: var(--transition-base);
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-overlay .btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  background-color: var(--color-white);
+  color: var(--color-warm-black);
+  border: none;
+}
+
+.product-overlay .btn:hover {
+  background-color: var(--color-matte-gold);
+  color: var(--color-white);
+}
+
+/* Badges on product cards */
+.product-card .badge {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border-radius: var(--border-radius);
+  background-color: var(--color-ecru);
+  color: var(--color-warm-black);
+}
+
+.product-card .badge.bg-danger {
+  background-color: var(--color-warm-black) !important;
+  color: var(--color-white) !important;
+}
+
+.product-card .badge.bg-warning {
+  background-color: var(--color-matte-gold) !important;
+  color: var(--color-white) !important;
+}
+
+/* ============================================
+   9. FORMS & INPUTS
+   ============================================ */
+.form-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-warm-black);
+  margin-bottom: 8px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--color-white);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-warm-black);
+  transition: var(--transition-base);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-matte-gold);
+  box-shadow: none;
+  outline: none;
+  background-color: var(--color-white);
+  color: var(--color-warm-black);
+}
+
+.form-control::placeholder {
+  color: var(--color-stone);
+  font-weight: 300;
+}
+
+.form-check-input {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-warm-black);
+  border-color: var(--color-warm-black);
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+  border-color: var(--color-matte-gold);
+}
+
+.form-check-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-warm-black);
+}
+
+/* Validation */
+.text-danger {
+  color: var(--color-warm-black) !important;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.input-group-text {
+  background-color: var(--color-white);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--color-stone);
+}
+
+/* ============================================
+   10. PRODUCT DETAIL PAGE
+   ============================================ */
+.product-detail-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-grid);
+  margin-bottom: var(--spacing-section-mobile);
+}
+
+@media (min-width: 992px) {
+  .product-detail-container {
+    grid-template-columns: 60% 40%;
+  }
+}
+
+.product-detail-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background-color: var(--color-ecru);
+}
+
+.product-detail-info {
+  padding: 0;
+}
+
+.product-detail-brand {
+  font-family: var(--font-body);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-stone);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.product-detail-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-element);
+}
+
+.product-detail-price {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-element);
+}
+
+.product-detail-description {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-element);
+}
+
+.product-detail-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-element) 0;
+}
+
+.product-detail-specs li {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-warm-black);
+  padding: 8px 0;
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.product-detail-specs li:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
+   11. HOMEPAGE SECTIONS
+   ============================================ */
+.hero-section {
+  width: 100%;
+  margin-bottom: var(--spacing-section-mobile);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    margin-bottom: var(--spacing-section);
+  }
+}
+
+.hero-image {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  background-color: var(--color-ecru);
+}
+
+.hero-content {
+  text-align: center;
+  padding: var(--spacing-section-mobile) 0;
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    padding: var(--spacing-section) 0;
+  }
+}
+
+.hero-headline {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 400;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-element);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 767px) {
+  .hero-headline {
+    font-size: 32px;
+  }
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-grid);
+  text-align: center;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-stone);
+  text-align: center;
+  margin-bottom: var(--spacing-grid);
+}
+
+/* New Arrivals Section */
+.new-arrivals-section {
+  padding: var(--spacing-section-mobile) 0;
+}
+
+@media (min-width: 768px) {
+  .new-arrivals-section {
+    padding: var(--spacing-section) 0;
+  }
+}
+
+/* Categories Section */
+.categories-section {
+  padding: var(--spacing-section-mobile) 0;
+  background-color: var(--color-ecru);
+}
+
+@media (min-width: 768px) {
+  .categories-section {
+    padding: var(--spacing-section) 0;
+  }
+}
+
+.category-card {
+  position: relative;
+  overflow: hidden;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--color-ecru);
+  transition: var(--transition-base);
+}
+
+.category-card:hover {
+  border-color: var(--color-matte-gold);
+}
+
+.category-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.category-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-base);
+}
+
+.category-card:hover .category-image {
+  transform: scale(1.02);
+}
+
+.category-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(transparent, rgba(26, 26, 24, 0.7));
+  transition: var(--transition-base);
+}
+
+.category-card:hover .category-overlay {
+  background: linear-gradient(transparent, rgba(26, 26, 24, 0.85));
+}
+
+.category-name {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-white);
+  margin: 0;
+}
+
+/* ============================================
+   12. FOOTER
+   ============================================ */
+footer {
+  background-color: var(--color-ivory);
+  border-top: var(--border-width) solid var(--border-color);
+  padding: var(--spacing-section-mobile) 0 var(--spacing-element) 0;
+  margin-top: auto;
+  color: var(--color-warm-black);
+}
+
+@media (min-width: 768px) {
+  footer {
+    padding: var(--spacing-section) 0 var(--spacing-element) 0;
+  }
+}
+
+footer h5 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-element);
+}
+
+footer p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-stone);
+  line-height: 1.7;
+}
+
+footer a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-stone);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+footer a:hover {
+  color: var(--color-matte-gold);
+}
+
+footer .list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer .list-unstyled li {
+  margin-bottom: 12px;
+}
+
+footer hr {
+  border-color: var(--border-color);
+  margin: var(--spacing-element) 0;
+  opacity: 1;
+}
+
+footer .social-links {
+  display: flex;
+  gap: 12px;
+}
+
+footer .social-links a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: transparent;
+  color: var(--color-warm-black);
+  transition: var(--transition-base);
+}
+
+footer .social-links a:hover {
+  background-color: var(--color-warm-black);
+  color: var(--color-ivory);
+  border-color: var(--color-warm-black);
+}
+
+/* ============================================
+   13. ALERTS
+   ============================================ */
+.alert {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--color-white);
+  color: var(--color-warm-black);
+  padding: 16px 20px;
+  margin-bottom: var(--spacing-element);
+}
+
+.alert-success {
+  border-color: var(--color-matte-gold);
+  background-color: var(--color-ecru);
+}
+
+.alert-danger {
+  border-color: var(--color-warm-black);
+  background-color: var(--color-white);
+}
+
+.alert-warning {
+  border-color: var(--color-matte-gold);
+  background-color: var(--color-ecru);
+}
+
+.alert-info {
+  border-color: var(--border-color);
+  background-color: var(--color-white);
+}
+
+/* ============================================
+   14. PAGINATION
+   ============================================ */
+.pagination {
+  margin-top: var(--spacing-grid);
+}
+
+.pagination .page-link {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--color-warm-black);
+  padding: 12px 16px;
+  margin: 0 4px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  background-color: var(--color-white);
+  transition: var(--transition-base);
+}
+
+.pagination .page-link:hover {
+  background-color: var(--color-ecru);
+  border-color: var(--color-matte-gold);
+  color: var(--color-warm-black);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--color-warm-black);
+  border-color: var(--color-warm-black);
+  color: var(--color-ivory);
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: var(--color-ecru);
+  border-color: var(--border-color);
+  color: var(--color-stone);
+  cursor: not-allowed;
+}
+
+/* ============================================
+   15. BREADCRUMB
+   ============================================ */
+.breadcrumb {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: var(--spacing-element);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.breadcrumb-item {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-stone);
+}
+
+.breadcrumb-item a {
+  color: var(--color-stone);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--color-matte-gold);
+}
+
+.breadcrumb-item.active {
+  color: var(--color-warm-black);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  color: var(--color-stone);
+  padding: 0 8px;
+}
+
+/* ============================================
+   16. UTILITY CLASSES
+   ============================================ */
+.text-muted {
+  color: var(--color-stone) !important;
+}
+
+.bg-light {
+  background-color: var(--color-ecru) !important;
+}
+
+.border {
+  border-color: var(--border-color) !important;
+}
+
+/* Remove Bootstrap default colors */
+.text-primary {
+  color: var(--color-warm-black) !important;
+}
+
+.text-success {
+  color: var(--color-warm-black) !important;
+}
+
+.text-danger {
+  color: var(--color-warm-black) !important;
+}
+
+.text-warning {
+  color: var(--color-warm-black) !important;
+}
+
+.text-info {
+  color: var(--color-warm-black) !important;
+}
+
+/* ============================================
+   17. SEARCH FORM
+   ============================================ */
+.search-form {
+  max-width: 400px;
+}
+
+.search-form .form-control {
+  background-color: var(--color-white);
+  border: var(--border-width) solid var(--border-color);
+  color: var(--color-warm-black);
+}
+
+.search-form .form-control::placeholder {
+  color: var(--color-stone);
+}
+
+.search-form .form-control:focus {
+  background-color: var(--color-white);
+  border-color: var(--color-matte-gold);
+}
+
+.search-form .btn {
+  background-color: transparent;
+  border: var(--border-width) solid var(--border-color);
+  border-left: none;
+  color: var(--color-warm-black);
+  padding: 14px 16px;
+}
+
+.search-form .btn:hover {
+  background-color: var(--color-warm-black);
+  color: var(--color-ivory);
+  border-color: var(--color-warm-black);
+}
+
+/* ============================================
+   18. EMPTY STATES
+   ============================================ */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-section-mobile) 0;
+}
+
+.empty-state i {
+  color: var(--color-stone);
+  opacity: 0.5;
+  margin-bottom: var(--spacing-element);
+}
+
+.empty-state h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-warm-black);
+  margin-bottom: var(--spacing-element);
+}
+
+.empty-state p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-stone);
+  margin-bottom: var(--spacing-element);
+}
+
+/* ============================================
+   19. RESPONSIVE ADJUSTMENTS
+   ============================================ */
+@media (max-width: 767px) {
+  h1 {
+    font-size: 32px;
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  h3 {
+    font-size: 20px;
+  }
+  
+  .hero-headline {
+    font-size: 28px;
+  }
+  
+  .section-title {
+    font-size: 24px;
+  }
+  
+  .btn {
+    padding: 14px 24px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   20. REMOVE BOOTSTRAP DEFAULTS
+   ============================================ */
+/* Remove all Bootstrap default colors and effects */
+.card {
+  box-shadow: none !important;
+}
+
+.card:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Remove focus outlines that don't match design */
+*:focus {
+  outline: none;
+}
+
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/* Remove Bootstrap gradients */
+.navbar {
+  background: var(--color-ivory) !important;
+}
+
+footer {
+  background: var(--color-ivory) !important;
+}

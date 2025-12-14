@@ -1,0 +1,56 @@
+﻿@model List<OnlineShop.Controllers.UserViewModel>
+@{
+    ViewData["Title"] = "Lista utilizatorilor";
+}
+
+<h2>Lista utilizatorilor</h2>
+
+<form method="get" asp-action="Index" class="form-inline mb-3">
+    <input type="text" name="search" class="form-control mr-2" placeholder="Caută..." value="@ViewBag.Search" />
+    <select name="role" class="form-control mr-2">
+        <option value="">Toate rolurile</option>
+        @if (ViewBag.Roles != null)
+        {
+            var rolesList = ViewBag.Roles as List<string>;
+            @if (rolesList != null)
+            {
+                @foreach (var r in rolesList)
+                {
+                    var selected = (ViewBag.Role == r) ? "selected" : "";
+                    <option value="@r" selected="@selected">@r</option>
+                }
+            }
+        }
+    </select>
+    <button type="submit" class="btn btn-primary">Filtrează</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Nume complet</th>
+            <th>Roluri</th>
+            <th>Creat la</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>@user.FullName</td>
+            <td>@string.Join(", ", user.Roles)</td>
+            <td>@user.CreatedAt.ToString("g")</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-info btn-sm">Detalii</a>
+                <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning btn-sm">Edit</a>
+                <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Șterge</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success">Adaugă utilizator nou</a>

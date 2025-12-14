@@ -1,0 +1,41 @@
+﻿@model OnlineShop.Models.Category
+
+@{
+    ViewData["Title"] = "Detalii categorie";
+}
+
+<h1 class="mb-4">Detalii categorie</h1>
+
+<div class="mb-3">
+    <h5>Nume:</h5>
+    <p>@Model.Name</p>
+</div>
+
+<div class="mb-3">
+    <h5>Descriere:</h5>
+    <p>@Model.Description</p>
+</div>
+
+<div class="mb-3">
+    <h5>Produse:</h5>
+    @if (Model.Products != null && Model.Products.Any())
+    {
+        <ul>
+            @foreach (var product in Model.Products)
+            {
+                <li>@product.Title</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Nu există produse în această categorie.</p>
+    }
+</div>
+
+<div class="mb-3">
+    <h5>Creată la:</h5>
+    <p>@Model.CreatedAt.ToString("dd.MM.yyyy")</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Înapoi</a>

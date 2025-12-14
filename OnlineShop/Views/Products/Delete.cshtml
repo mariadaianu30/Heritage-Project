@@ -1,0 +1,39 @@
+﻿@model OnlineShop.Models.Product
+
+@{
+    ViewData["Title"] = "Șterge produs";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="alert alert-warning">
+    Ești sigur că vrei să ștergi acest produs? Această acțiune nu poate fi anulată.
+</div>
+
+<div class="mb-3">
+    <strong>Titlu:</strong> @Model.Title
+</div>
+<div class="mb-3">
+    <strong>Descriere:</strong> @Model.Description
+</div>
+<div class="mb-3">
+    <strong>Preț:</strong> @Model.Price RON
+</div>
+<div class="mb-3">
+    <strong>Stoc:</strong> @Model.Stock
+</div>
+<div class="mb-3">
+    <strong>Imagine:</strong><br />
+    <img src="@Model.ImagePath" alt="Produs" style="max-width:200px;" />
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Șterge produs</button>
+    <a asp-action="Index" class="btn btn-secondary">Anulează</a>
+</form>

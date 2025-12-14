@@ -1,0 +1,60 @@
+﻿@model List<OnlineShop.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Coșul Meu";
+}
+
+<h2>Coșul Meu</h2>
+
+@if (!Model.Any())
+{
+    <p>Coșul este gol.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produs</th>
+                <th>Categorie</th>
+                <th>Preț</th>
+                <th>Cantitate</th>
+                <th>Total</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (item.Product != null && item.Product.Category != null)
+                {
+                <tr>
+                    <td>@item.Product.Title</td>
+                    <td>@item.Product.Category.Name</td>
+                    <td>@item.Product.Price.ToString("C")</td>
+                    <td>
+                        <form asp-action="UpdateQuantity" method="post" class="d-inline">
+                            <input type="hidden" name="cartItemId" value="@item.Id" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="0" style="width:60px" />
+                            <button type="submit" class="btn btn-sm btn-primary">Actualizează</button>
+                        </form>
+                    </td>
+                    <td>@(item.Quantity* item.Product.Price).ToString("C")</td>
+                    <td>
+                        <form asp-action="Remove" method="post" class="d-inline">
+                            <input type="hidden" name="cartItemId" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">Șterge</button>
+                        </form>
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <h4>Total: @ViewBag.TotalPrice.ToString("C")</h4>
+
+    <form asp-action="Clear" method="post">
+        <button type="submit" class="btn btn-warning">Golire coș</button>
+    </form>
+}

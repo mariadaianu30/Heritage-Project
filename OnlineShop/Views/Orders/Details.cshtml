@@ -1,0 +1,97 @@
+﻿@model OnlineShop.Models.Order
+@{
+    ViewData["Title"] = $"Detalii comandă #{Model.Id}";
+    bool isAdmin = ViewBag.IsAdmin ?? false;
+}
+
+<h1 class="mb-4"><i class="fas fa-box-open me-2"></i>Detalii comandă #@Model.Id</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Informații comandă</h5>
+        <p><strong>Data:</strong> @Model.OrderDate.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</p>
+        <p><strong>Total:</strong> @Model.TotalAmount.ToString("N2") RON</p>
+        <p>
+            <strong>Status:</strong>
+            @switch (Model.Status)
+            {
+                case OnlineShop.Models.OrderStatus.Pending:
+                    <span class="badge bg-warning text-dark">În așteptare</span>
+                    break;
+                case OnlineShop.Models.OrderStatus.Processing:
+                    <span class="badge bg-primary">In procesare</span>
+                    break;
+                case OnlineShop.Models.OrderStatus.Shipped:
+                    <span class="badge bg-info text-dark">Expediată</span>
+                    break;
+                case OnlineShop.Models.OrderStatus.Delivered:
+                    <span class="badge bg-success">Livrată</span>
+                    break;
+                case OnlineShop.Models.OrderStatus.Cancelled:
+                    <span class="badge bg-danger">Anulată</span>
+                    break;
+            }
+        </p>
+        <p><strong>Adresa de livrare:</strong> @Model.ShippingAddress</p>
+        <p><strong>Utilizator:</strong> @Model.User?.Email</p>
+    </div>
+</div>
+
+<h5 class="mb-3">Produse comandate</h5>
+<div class="table-responsive mb-4">
+    <table class="table table-striped align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Produs</th>
+                <th>Categorie</th>
+                <th>Preț/unitate</th>
+                <th>Cantitate</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Product?.Title</td>
+                    <td>@item.Product?.Category?.Name</td>
+                    <td>@item.UnitPrice.ToString("N2") RON</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.UnitPrice* item.Quantity).ToString("N2") RON</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex gap-2">
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="fas fa-chevron-left me-1"></i>Înapoi la comenzi
+    </a>
+
+    @* Cancel pentru utilizator (doar dacă status Pending) *@
+    @if (!isAdmin && Model.Status == OnlineShop.Models.OrderStatus.Pending)
+    {
+        <form asp-action="Cancel" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Ești sigur că vrei să anulezi această comandă?');">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-outline-danger">
+                <i class="fas fa-times me-1"></i>Anulează comanda
+            </button>
+        </form>
+    }
+
+    @* Admin poate schimba statusul *@
+    @if (isAdmin)
+    {
+        <form asp-action="UpdateStatus" asp-route-id="@Model.Id" method="post" class="d-flex">
+            @Html.AntiForgeryToken()
+            <select name="status" class="form-select w-auto me-2" onchange="this.form.submit()">
+                @foreach (var s in Enum.GetValues(typeof(OnlineShop.Models.OrderStatus)).Cast<OnlineShop.Models.OrderStatus>())
+                {
+                    <option value="@s" selected="@(Model.Status == s)">@s</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-primary">Actualizează</button>
+        </form>
+    }
+</div>

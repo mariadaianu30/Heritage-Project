@@ -1,0 +1,53 @@
+﻿@model IEnumerable<OnlineShop.Models.Category>
+
+@{
+    ViewData["Title"] = "Categorii";
+}
+
+<h1 class="mb-4">Categorii</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    <i class="fas fa-plus me-1"></i>Adaugă categorie
+</a>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<table class="table table-hover align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>Nume</th>
+            <th>Descriere</th>
+            <th>Produse</th>
+            <th>Creată la</th>
+            <th class="text-end">Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>@(category.Products?.Count ?? 0)</td>
+                <td>@category.CreatedAt.ToString("dd.MM.yyyy")</td>
+                <td class="text-end">
+                    <a asp-action="Details" asp-route-id="@category.Id" class="btn btn-sm btn-info me-1">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-sm btn-warning me-1">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

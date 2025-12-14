@@ -1,0 +1,71 @@
+﻿@model OnlineShop.Controllers.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Înregistrare";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Success"]
+            </div>
+        }
+
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FirstName" class="form-label">Prenume</label>
+                    <input asp-for="FirstName" class="form-control" placeholder="Prenume" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LastName" class="form-label">Nume</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Nume" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="email@exemplu.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Parolă</label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Minim 6 caractere" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label">Confirmă parola</label>
+                <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirmă parola" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Address" class="form-label">Adresă</label>
+                <input asp-for="Address" class="form-control" placeholder="Adresa completă" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">Înregistrează-te</button>
+        </form>
+
+        <p class="text-center mt-4">
+            <small class="text-muted">Ai deja cont? </small>
+            <a asp-action="Login" asp-controller="Account" class="text-muted">Autentifică-te aici</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

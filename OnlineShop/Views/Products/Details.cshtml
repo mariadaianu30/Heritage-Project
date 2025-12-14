@@ -1,0 +1,56 @@
+﻿@model OnlineShop.Models.Product
+
+@{
+    ViewData["Title"] = "Detalii produs";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="mb-3">
+    <strong>Titlu:</strong> @Model.Title
+</div>
+
+<div class="mb-3">
+    <strong>Descriere:</strong><br />
+    @Html.Raw(Model.Description)
+</div>
+
+<div class="mb-3">
+    <strong>Preț:</strong> @Model.Price RON
+</div>
+
+<div class="mb-3">
+    <strong>Stoc:</strong> @Model.Stock
+</div>
+
+<div class="mb-3">
+    <strong>Categorie:</strong> @Model.Category?.Name
+</div>
+
+<div class="mb-3">
+    <strong>Status:</strong> @Model.Status
+</div>
+
+@if (!string.IsNullOrEmpty(Model.AdminFeedback))
+{
+    <div class="mb-3">
+        <strong>Feedback Admin:</strong> @Model.AdminFeedback
+    </div>
+}
+
+<div class="mb-3">
+    <strong>Imagine:</strong><br />
+    <img src="@Model.ImagePath" alt="@Model.Title" style="max-width:400px;" />
+</div>
+
+
+
+<div class="mb-3">
+    <a asp-action="Index" class="btn btn-secondary">Înapoi la produse</a>
+
+    @if (User.IsInRole("Admin") || (User.IsInRole("Collaborator") && Model.CollaboratorId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editează produs</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Șterge produs</a>
+    }
+</div>

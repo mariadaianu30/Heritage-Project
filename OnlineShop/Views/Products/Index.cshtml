@@ -1,0 +1,63 @@
+﻿@model IEnumerable<OnlineShop.Models.Product>
+
+@{
+    ViewData["Title"] = "Lista produse";
+    var isAdmin = ViewBag.IsAdmin as bool? ?? false;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Warning"] != null)
+{
+    <div class="alert alert-warning">@TempData["Warning"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-primary">Adaugă produs</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Titlu</th>
+            <th>Categorie</th>
+            <th>Preț</th>
+            <th>Stoc</th>
+            <th>Status</th>
+            <th>Colaborator</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Title</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Price RON</td>
+                <td>@product.Stock</td>
+                <td>@product.Status</td>
+                <td>@product.Collaborator?.FirstName @product.Collaborator?.LastName</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-info btn-sm">Detalii</a>
+
+                    @if (isAdmin || (User.IsInRole("Collaborator") && product.CollaboratorId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value))
+                    {
+                        <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary btn-sm">Editează</a>
+                        <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm">Șterge</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

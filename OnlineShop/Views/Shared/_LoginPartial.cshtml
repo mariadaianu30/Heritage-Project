@@ -1,0 +1,148 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.GetUserAsync(User);
+    var displayName = user?.FirstName ?? user?.Email ?? "Utilizator";
+    
+    <ul class="navbar-nav">
+        @* Coș de cumpărături *@
+        @if (User.IsInRole("User") || User.IsInRole("Collaborator"))
+        {
+            <li class="nav-item">
+                <a class="nav-link position-relative" asp-controller="Carts" asp-action="Index" title="Coșul meu">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle d-none">0</span>
+                </a>
+            </li>
+        }
+        
+        @if (User.IsInRole("User") || User.IsInRole("Collaborator"))
+        {
+            <li class="nav-item">
+                <a class="nav-link position-relative"
+                   asp-controller="Wishlists"
+                   asp-action="Index"
+                   title="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-badge badge bg-danger position-absolute
+                          top-0 start-100 translate-middle d-none">0</span>
+                </a>
+            </li>
+        }
+
+        
+        @* Dropdown utilizator *@
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle me-1"></i>@displayName
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <h6 class="dropdown-header">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <span class="badge bg-danger me-1">Admin</span>
+                        }
+                        else if (User.IsInRole("Collaborator"))
+                        {
+                            <span class="badge bg-warning text-dark me-1">Colaborator</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary me-1">User</span>
+                        }
+                        @user?.Email
+                    </h6>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                        <i class="fas fa-user me-2"></i>Profilul meu
+                    </a>
+                </li>
+                
+                @if (User.IsInRole("User") || User.IsInRole("Admin"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
+                            <i class="fas fa-box me-2"></i>Comenzile mele
+                        </a>
+                    </li>
+                }
+                
+                @if (User.IsInRole("Collaborator") || User.IsInRole("Admin"))
+                {
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Index">
+                            <i class="fas fa-boxes me-2"></i>Produsele mele
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Create">
+                            <i class="fas fa-plus me-2"></i>Adaugă produs
+                        </a>
+                    </li>
+                }
+                
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <h6 class="dropdown-header text-danger">
+                            <i class="fas fa-shield-alt me-1"></i>Administrare
+                        </h6>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" asp-controller="Users" asp-action="Index">
+                            <i class="fas fa-users me-2"></i>Utilizatori
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" asp-controller="Categories" asp-action="Index">
+                            <i class="fas fa-tags me-2"></i>Categorii
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Pending">
+                            <i class="fas fa-clock me-2"></i>Produse în așteptare
+                        </a>
+                    </li>
+                }
+                
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
+                        <i class="fas fa-key me-2"></i>Schimbă parola
+                    </a>
+                </li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                        <button type="submit" class="dropdown-item text-danger">
+                            <i class="fas fa-sign-out-alt me-2"></i>Deconectare
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="Login">
+                <i class="fas fa-sign-in-alt me-1"></i>Autentificare
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-primary btn-sm ms-2 px-3" asp-controller="Account" asp-action="Register">
+                <i class="fas fa-user-plus me-1"></i>Înregistrare
+            </a>
+        </li>
+    </ul>
+}

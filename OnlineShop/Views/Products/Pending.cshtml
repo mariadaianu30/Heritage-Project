@@ -1,0 +1,43 @@
+﻿@model IEnumerable<OnlineShop.Models.Product>
+@{
+    ViewBag.Title = "Produse în așteptare";
+}
+
+<h2>Produse în așteptare</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titlu</th>
+            <th>Colaborator</th>
+            <th>Categorie</th>
+            <th>Preț</th>
+            <th>Status</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Title</td>
+                <td>@product.Collaborator?.UserName</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>@product.Status</td>
+                <td>
+                    <form asp-action="Approve" asp-route-id="@product.Id" method="post" style="display:inline">
+                        <input type="hidden" name="feedback" value="Produs aprobat" />
+                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                        @Html.AntiForgeryToken()
+                    </form>
+                    <form asp-action="Reject" asp-route-id="@product.Id" method="post" style="display:inline">
+                        <input type="text" name="feedback" placeholder="Motiv respingere" class="form-control form-control-sm" />
+                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                        @Html.AntiForgeryToken()
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

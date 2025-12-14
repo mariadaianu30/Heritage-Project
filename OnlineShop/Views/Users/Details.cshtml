@@ -1,0 +1,73 @@
+﻿@model OnlineShop.Controllers.UserDetailsViewModel
+@{
+    ViewData["Title"] = "Detalii utilizator";
+}
+
+<h2>Detalii utilizator</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Nume complet:</strong> @Model.FullName</p>
+        <p><strong>Adresă:</strong> @Model.Address</p>
+        <p><strong>Telefon:</strong> @Model.PhoneNumber</p>
+        <p><strong>Roluri:</strong> @string.Join(", ", Model.Roles)</p>
+        <p><strong>Creat la:</strong> @Model.CreatedAt.ToString("g")</p>
+        <p><strong>Comenzi:</strong> @Model.OrdersCount</p>
+        <p><strong>Recenzii:</strong> @Model.ReviewsCount</p>
+        <p><strong>Produse adăugate:</strong> @Model.ProductsCount</p>
+    </div>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editare</a>
+<a asp-action="Index" class="btn btn-secondary">Înapoi la listă</a>
+
+<hr />
+
+@if (Model.Roles.Contains("User"))
+{
+    <h4>Cereri colaborator</h4>
+    @if (Model.Roles.Contains("Collaborator") || Model.Roles.Contains("Admin"))
+    {
+        <p>Acest utilizator este deja colaborator sau admin.</p>
+    }
+    else
+    {
+        var pendingRequests = ViewBag.CollabRequests as List<OnlineShop.Models.CollaboratorRequest>;
+        if (pendingRequests != null && pendingRequests.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data cererii</th>
+                        <th>Status</th>
+                        <th>Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in pendingRequests)
+                    {
+                        <tr>
+                            <td>@r.RequestedAt.ToString("g")</td>
+                            <td>@r.Status</td>
+                            <td>
+                                <form asp-action="ApproveCollaborator" method="post" class="d-inline">
+                                    <input type="hidden" name="requestId" value="@r.Id" />
+                                    <button type="submit" class="btn btn-success btn-sm">Acceptă</button>
+                                </form>
+                                <form asp-action="DenyCollaborator" method="post" class="d-inline">
+                                    <input type="hidden" name="requestId" value="@r.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Respinge</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Nu există cereri în așteptare.</p>
+        }
+    }
+}

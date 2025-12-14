@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "Eroare";
+    Layout = "_Layout";
+}
+
+<div class="error-page min-vh-75 d-flex align-items-center justify-content-center">
+    <div class="text-center">
+        <div class="error-icon mb-4">
+            <i class="fas fa-exclamation-triangle fa-5x text-warning"></i>
+        </div>
+        
+        <h1 class="display-1 fw-bold text-primary mb-3">Oops!</h1>
+        <h2 class="h4 text-muted mb-4">A apărut o eroare neașteptată</h2>
+        
+        <p class="text-muted mb-4 mx-auto" style="max-width: 500px;">
+            Ne pare rău, dar ceva nu a funcționat corect. Echipa noastră a fost notificată 
+            și lucrează pentru a rezolva problema.
+        </p>
+        
+        <div class="error-actions d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">
+                <i class="fas fa-home me-2"></i>Pagina principală
+            </a>
+            <button onclick="history.back()" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-arrow-left me-2"></i>Înapoi
+            </button>
+        </div>
+        
+        <div class="helpful-links mt-5 pt-4 border-top">
+            <p class="text-muted small mb-3">Poate te ajută:</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a asp-controller="Home" asp-action="Index" class="text-decoration-none">
+                    <i class="fas fa-shopping-bag me-1"></i>Produse
+                </a>
+                <a asp-controller="Account" asp-action="Profile" class="text-decoration-none">
+                    <i class="fas fa-user me-1"></i>Contul meu
+                </a>
+                <a asp-controller="Carts" asp-action="Index" class="text-decoration-none">
+                    <i class="fas fa-shopping-cart me-1"></i>Coșul meu
+                </a>
+                <a href="mailto:support@onlineshop.ro" class="text-decoration-none">
+                    <i class="fas fa-envelope me-1"></i>Contact
+                </a>
+            </div>
+        </div>
+        
+        @if (ViewContext.HttpContext.Request.Query.ContainsKey("code"))
+        {
+            <div class="error-details mt-4 p-3 bg-light rounded-3 mx-auto" style="max-width: 400px;">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Cod eroare: @ViewContext.HttpContext.Request.Query["code"]
+                </small>
+            </div>
+        }
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .error-page {
+            padding: 3rem 1rem;
+        }
+        
+        .error-icon {
+            animation: bounce 2s infinite;
+        }
+        
+        @@keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .min-vh-75 {
+            min-height: 75vh;
+        }
+        
+        .helpful-links a {
+            color: var(--primary-color);
+            transition: all 0.2s ease;
+        }
+        
+        .helpful-links a:hover {
+            color: var(--primary-hover);
+        }
+    </style>
+}

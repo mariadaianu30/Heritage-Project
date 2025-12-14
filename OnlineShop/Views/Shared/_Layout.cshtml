@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Héritage</title>
+    
+    @* Bootstrap CSS *@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    
+    @* Font Awesome *@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    
+    @* Google Fonts - Cormorant Garamond & Inter *@
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+    
+    @* Custom CSS - Héritage Design System *@
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    @* Navbar *@
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                Héritage
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+                @* Search form *@
+                <form asp-controller="Home" asp-action="Index" method="get" class="search-form d-flex mx-auto my-2 my-lg-0">
+                    <input type="search" name="search" class="form-control me-2" placeholder="Caută produse..." 
+                           value="@ViewBag.Search" aria-label="Caută">
+                    <button class="btn" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                
+                @* Navigation links *@
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
+                            <i class="fas fa-home me-1"></i>Acasă
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-th-large me-1"></i>Categorii
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="Index">
+                                    <i class="fas fa-border-all me-2 text-muted"></i>Toate produsele
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            @* Categoriile vor fi încărcate dinamic sau prin ViewComponent *@
+                            <li>
+                                <a class="dropdown-item text-muted small" asp-controller="Categories" asp-action="Index">
+                                    <i class="fas fa-ellipsis-h me-2"></i>Vezi toate categoriile
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                @* Login partial *@
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+    
+    @* Main content *@
+    <main>
+        <div class="container">
+            @* Notifications *@
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <div>@TempData["Success"]</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <div>@TempData["Error"]</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            
+            @if (TempData["Warning"] != null)
+            {
+                <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <div>@TempData["Warning"]</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            
+            @if (TempData["Info"] != null)
+            {
+                <div class="alert alert-info alert-dismissible fade show d-flex align-items-center" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <div>@TempData["Info"]</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            
+            @RenderBody()
+        </div>
+    </main>
+    
+    @* Footer *@
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>Héritage</h5>
+                    <p class="mb-3">Curated vintage pieces with timeless elegance.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5>Link-uri rapide</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a asp-controller="Home" asp-action="Index"><i class="fas fa-angle-right me-2"></i>Acasă</a>
+                        </li>
+                        <li class="mb-2">
+                            <a asp-controller="Home" asp-action="Index"><i class="fas fa-angle-right me-2"></i>Produse</a>
+                        </li>
+                        <li class="mb-2">
+                            <a asp-controller="Home" asp-action="Privacy"><i class="fas fa-angle-right me-2"></i>Confidențialitate</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5>Informații utile</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="#"><i class="fas fa-angle-right me-2"></i>Livrare și plată</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#"><i class="fas fa-angle-right me-2"></i>Politica de retur</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#"><i class="fas fa-angle-right me-2"></i>Termeni și condiții</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#"><i class="fas fa-angle-right me-2"></i>Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>București, România
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>+40 123 456 789
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>contact@onlineshop.ro
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock me-2"></i>Lun-Vin: 9:00 - 18:00
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 small">
+                        &copy; @DateTime.Now.Year Héritage. Toate drepturile rezervate.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <span class="small text-muted">Plăți securizate</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    @* Bootstrap JS *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    @* Custom Scripts *@
+    <script>
+        // Auto-hide alerts after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 5000);
+            });
+            
+            // Update cart badge
+            updateCartBadge();
+        });
+        
+        // Function to update cart badge
+        async function updateCartBadge() {
+            try {
+                const response = await fetch('/Carts/Count');
+                const data = await response.json();
+                const badge = document.querySelector('.cart-badge');
+                if (badge) {
+                    if (data.count > 0) {
+                        badge.textContent = data.count > 99 ? '99+' : data.count;
+                        badge.classList.remove('d-none');
+                    } else {
+                        badge.classList.add('d-none');
+                    }
+                }
+            } catch (error) {
+                console.log('Could not update cart badge');
+            }
+        }
+
+        
+        // Confirm delete actions
+        function confirmDelete(message) {
+            return confirm(message || 'Ești sigur că vrei să ștergi acest element?');
+        }
+    </script>
+
+
+    <script>
+        async function updateWishlistBadge() {
+            try {
+                const response = await fetch('/Wishlists/Count');
+                const data = await response.json();
+
+                const badge = document.querySelector('.wishlist-badge');
+                if (!badge) return;
+
+                if (data.count > 0) {
+                    badge.textContent = data.count;
+                    badge.classList.remove('d-none');
+                } else {
+                    badge.classList.add('d-none');
+                }
+            } catch {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+            updateWishlistBadge();
+        });
+    </script>
+
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

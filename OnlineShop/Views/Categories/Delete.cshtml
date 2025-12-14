@@ -1,0 +1,20 @@
+﻿@model OnlineShop.Models.Category
+
+@{
+    ViewData["Title"] = "Șterge categorie";
+}
+
+<h1 class="mb-4 text-danger">Șterge categorie</h1>
+
+<div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle me-2"></i>
+    Ești sigur că vrei să ștergi categoria <strong>@Model.Name</strong>?
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">
+        <i class="fas fa-trash me-1"></i>Șterge
+    </button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Anulează</a>
+</form>

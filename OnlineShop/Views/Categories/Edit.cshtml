@@ -1,0 +1,50 @@
+﻿@model OnlineShop.Models.Category
+
+@{
+    ViewData["Title"] = "Editează categorie";
+}
+
+<h1 class="mb-4">Editează categorie</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ImagePath" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.ImagePath))
+    {
+        <div class="mb-3">
+            <label class="form-label">Imagine curentă</label><br />
+            <img src="@Model.ImagePath"
+                 alt="Imagine categorie"
+                 class="img-thumbnail"
+                 style="max-height: 150px;" />
+        </div>
+    }
+
+    <div class="mb-3">
+        <label class="form-label">Schimbă imaginea</label>
+        <input type="file" name="image" class="form-control" accept="image/*" />
+        <small class="text-muted">Lasă gol dacă nu vrei să schimbi imaginea</small>
+    </div>
+
+    <button type="submit" class="btn btn-warning">
+        <i class="fas fa-edit me-1"></i>Salvează modificările
+    </button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Anulează</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
