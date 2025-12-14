@@ -1,64 +1,65 @@
-# Heritage - Magazin Online de Haine Vintage
+# Heritage - Vintage Clothing Online Store
 
-Heritage este un proiect de magazin online dedicat pasionaților de haine vintage, construit folosind **C#** și **ASP.NET Core MVC**. Proiectul oferă o experiență completă de navigare și cumpărare, combinând design elegant și funcționalitate intuitivă.
-
----
-
-## Funcționalități principale
-
-- **Catalog de produse**: Vizualizarea și filtrarea produselor după categorie, preț, rating și noutăți.  
-- **Detalii produs**: Fiecare produs are o pagină dedicată cu informații complete: titlu, preț, categorie, stoc disponibil și imagine.  
-- **Coș de cumpărături**: Utilizatorii pot adăuga produse în coș și gestiona comenzile.  
-- **Wishlist**: Posibilitatea de a adăuga produse preferate în wishlist pentru a le accesa mai ușor ulterior.  
-- **Filtre și sortări**: Filtrarea produselor după categorie, sortare după preț, rating sau cele mai noi produse.  
-- **Gestionare admin**: Adminii pot adăuga produse, gestiona stocuri și categorii.
+Heritage is an online store project dedicated to vintage clothing enthusiasts, built using **C#** and **ASP.NET Core MVC**. The project offers a complete browsing and shopping experience, combining elegant design with intuitive functionality.
 
 ---
 
-## Modele principale
+## Main Features
+
+- **Product Catalog**: Browse and filter products by category, price, rating, and new arrivals.  
+- **Product Details**: Each product has a dedicated page with full information: title, price, category, stock availability, and image.  
+- **Shopping Cart**: Users can add products to their cart and manage their orders.  
+- **Wishlist**: Users can add favorite products to a wishlist for easy access later.  
+- **Filters and Sorting**: Filter products by category and sort by price, rating, or newest arrivals.  
+- **Admin Management**: Admins can add products, manage stock, and handle categories.
+
+---
+
+## Main Models
 
 1. **Product**  
    - Id, Title, Description, Price, Stock, ImagePath  
-   - Relație cu `Category`  
+   - Relationship with `Category`  
 
 2. **Category**  
    - Id, Name, ImagePath  
-   - Relație cu `Product`  
+   - Relationship with `Product`  
 
 3. **User** (Identity)  
    - Id, UserName, Email  
-   - Roluri: `User`, `Collaborator`, `Admin`  
+   - Roles: `User`, `Collaborator`, `Admin`  
 
 4. **Cart / CartItem**  
-   - Gestionarea coșului de cumpărături pentru fiecare utilizator  
+   - Handles each user's shopping cart  
 
 5. **Wishlist / WishlistItem**  
-   - Gestionarea listei de favorite pentru fiecare utilizator  
+   - Handles each user's list of favorite products  
 
 ---
 
-## Posibilități și extinderi
+## Possibilities and Extensions
 
-- Integrare **plăți online** (Stripe, PayPal)  
-- Sistem de **rating și recenzii** pentru produse  
-- Filtrare avansată și sugestii personalizate  
-- Dashboard admin cu statistici despre vânzări și stocuri  
-- Responsivitate completă pentru mobile și tablete  
+- Integration with **online payments** (Stripe, PayPal)  
+- Product **ratings and reviews** system  
+- Advanced filtering and personalized suggestions  
+- Admin dashboard with sales and stock statistics  
+- Fully responsive design for mobile and tablet devices  
 
 ---
 
-## Tehnologii utilizate
+## Technologies Used
 
 - **C# / .NET Core 7**  
 - **ASP.NET Core MVC**  
-- **Entity Framework Core** (pentru acces la baza de date)  
-- **Bootstrap 5** pentru design și layout  
-- **Font Awesome** pentru icon-uri  
+- **Entity Framework Core** (for database access)  
+- **Bootstrap 5** for layout and styling  
+- **Font Awesome** for icons  
 
 ---
 
-## Instalare și rulare
+## Installation and Running
 
-1. Clonează proiectul:  
+1. Clone the project:  
    ```bash
    git clone https://github.com/username/heritage.git
+
