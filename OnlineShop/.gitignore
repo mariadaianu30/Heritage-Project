@@ -61,3 +61,6 @@ Thumbs.db
 # Rider
 .idea/
 *.sln.iml
+
+# Documentation
+GHID_RULARE.md
