@@ -326,6 +326,100 @@ namespace OnlineShop.Migrations
                     b.ToTable("CollaboratorRequests");
                 });
 
+            modelBuilder.Entity("OnlineShop.Models.Color", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("HexCode")
+                        .HasMaxLength(7)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Colors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HexCode = "#000000",
+                            Name = "Negru"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            HexCode = "#FFFFFF",
+                            Name = "Alb"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            HexCode = "#FF0000",
+                            Name = "Roșu"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            HexCode = "#0000FF",
+                            Name = "Albastru"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            HexCode = "#FFFF00",
+                            Name = "Galben"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            HexCode = "#FFA500",
+                            Name = "Portocaliu"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            HexCode = "#008000",
+                            Name = "Verde"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            HexCode = "#FFC0CB",
+                            Name = "Roz"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            HexCode = "#800080",
+                            Name = "Violet"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            HexCode = "#A52A2A",
+                            Name = "Maro"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            HexCode = "#808080",
+                            Name = "Gri"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            HexCode = "#F5F5DC",
+                            Name = "Bej"
+                        });
+                });
+
             modelBuilder.Entity("OnlineShop.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -403,6 +497,9 @@ namespace OnlineShop.Migrations
                     b.Property<string>("CollaboratorId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ColorId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
@@ -418,6 +515,9 @@ namespace OnlineShop.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Size")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
@@ -438,6 +538,8 @@ namespace OnlineShop.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CollaboratorId");
+
+                    b.HasIndex("ColorId");
 
                     b.HasIndex("Status");
 
@@ -475,6 +577,28 @@ namespace OnlineShop.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductFAQs");
+                });
+
+            modelBuilder.Entity("OnlineShop.Models.ProductMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Material")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Percentage")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductMaterials");
                 });
 
             modelBuilder.Entity("OnlineShop.Models.Review", b =>
@@ -683,15 +807,34 @@ namespace OnlineShop.Migrations
                         .HasForeignKey("CollaboratorId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("OnlineShop.Models.Color", "Color")
+                        .WithMany("Products")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
 
                     b.Navigation("Collaborator");
+
+                    b.Navigation("Color");
                 });
 
             modelBuilder.Entity("OnlineShop.Models.ProductFAQ", b =>
                 {
                     b.HasOne("OnlineShop.Models.Product", "Product")
                         .WithMany("FAQs")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("OnlineShop.Models.ProductMaterial", b =>
+                {
+                    b.HasOne("OnlineShop.Models.Product", "Product")
+                        .WithMany("Materials")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -771,6 +914,11 @@ namespace OnlineShop.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("OnlineShop.Models.Color", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("OnlineShop.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
@@ -781,6 +929,8 @@ namespace OnlineShop.Migrations
                     b.Navigation("CartItems");
 
                     b.Navigation("FAQs");
+
+                    b.Navigation("Materials");
 
                     b.Navigation("OrderItems");
 

@@ -1,42 +1,56 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using OnlineShop.Models.Enums;
 
 namespace OnlineShop.Models
 {
     public class Product
     {
+        // ===== CHEIE PRIMARĂ =====
         [Key]
         public int Id { get; set; }
 
+        // ===== DATE DE BAZĂ =====
+
         [Required(ErrorMessage = "Titlul produsului este obligatoriu")]
-        [StringLength(200, MinimumLength = 3, ErrorMessage = "Titlul trebuie să aibă între 3 și 200 de caractere")]
+        [StringLength(200, MinimumLength = 3)]
         public string Title { get; set; } = null!;
 
         [Required(ErrorMessage = "Descrierea produsului este obligatorie")]
-        [StringLength(2000, MinimumLength = 10, ErrorMessage = "Descrierea trebuie să aibă între 10 și 2000 de caractere")]
+        [StringLength(2000, MinimumLength = 10)]
         public string Description { get; set; } = null!;
 
         [Required(ErrorMessage = "Imaginea produsului este obligatorie")]
         [StringLength(500)]
         public string ImagePath { get; set; } = null!;
 
-        [Required(ErrorMessage = "Prețul este obligatoriu")]
-        [Range(0.01, 1000000, ErrorMessage = "Prețul trebuie să fie mai mare decât 0")]
+        [Required]
+        [Range(0.01, 1_000_000)]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "Stocul este obligatoriu")]
-        [Range(0, int.MaxValue, ErrorMessage = "Stocul nu poate fi negativ")]
+        [Required]
+        [Range(0, int.MaxValue)]
         public int Stock { get; set; }
 
-        // Rating-ul mediu calculat automat din review-uri (1-5)
+        // ===== ATRIBUTE FASHION =====
+
+        [Required(ErrorMessage = "Mărimea este obligatorie")]
+        public ProductSize Size { get; set; }
+
+        [Required(ErrorMessage = "Culoarea este obligatorie")]
+        public int ColorId { get; set; }
+
+        [ForeignKey(nameof(ColorId))]
+        public virtual Color Color { get; set; } = null!;
+
+        // ===== RATING & STATUS =====
+
         [Column(TypeName = "decimal(3,2)")]
         public decimal? AverageRating { get; set; }
 
-        // Statusul produsului (Pending, Approved, Rejected)
         public ProductStatus Status { get; set; } = ProductStatus.Pending;
 
-        // Feedback de la administrator pentru colaborator
         [StringLength(500)]
         public string? AdminFeedback { get; set; }
 
@@ -45,41 +59,36 @@ namespace OnlineShop.Models
 
         // ===== CHEI STRĂINE =====
 
-        [Required(ErrorMessage = "Categoria este obligatorie")]
+        [Required]
         public int CategoryId { get; set; }
 
-        // Colaboratorul care a propus produsul (poate fi null pentru produse adăugate de admin)
         public string? CollaboratorId { get; set; }
 
-        // ===== RELAȚII DE NAVIGARE =====
+        // ===== RELAȚII =====
 
-        [ForeignKey("CategoryId")]
+        [ForeignKey(nameof(CategoryId))]
         public virtual Category? Category { get; set; }
 
-        [ForeignKey("CollaboratorId")]
+        [ForeignKey(nameof(CollaboratorId))]
         public virtual ApplicationUser? Collaborator { get; set; }
 
-        // Review-urile produsului (1:N)
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
-
-        // FAQ-uri pentru AI Assistant (1:N)
         public virtual ICollection<ProductFAQ> FAQs { get; set; } = new List<ProductFAQ>();
-
-        // Prezența în coșuri (1:N)
         public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
-
-        // Prezența în wishlist-uri (1:N)
         public virtual ICollection<WishlistItem> WishlistItems { get; set; } = new List<WishlistItem>();
-
-        // Prezența în comenzi (1:N)
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
-        // ===== METODE HELPER =====
+        // 🔥 materiale + procentaj
+        public virtual ICollection<ProductMaterial> Materials { get; set; } = new List<ProductMaterial>();
 
-        // Verifică dacă produsul este disponibil pentru vânzare
-        public bool IsAvailable => Status == ProductStatus.Approved && Stock > 0;
+        // ===== HELPER METHODS =====
 
-        // Recalculează rating-ul mediu
+        public bool IsAvailable =>
+            Status == ProductStatus.Approved && Stock > 0;
+
+        public bool AreMaterialsValid =>
+            Materials.Any() && Materials.Sum(m => m.Percentage) == 100;
+
         public void RecalculateRating()
         {
             if (Reviews.Any(r => r.Rating.HasValue))

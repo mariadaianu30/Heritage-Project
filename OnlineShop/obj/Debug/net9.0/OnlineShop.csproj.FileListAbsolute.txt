@@ -218,7 +218,6 @@
 /Users/erikaplesca/Desktop/Online-Shop/OnlineShop/bin/Debug/net9.0/app.db
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/bin/Debug/net9.0/appsettings.Development.json
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/bin/Debug/net9.0/appsettings.json
-C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/bin/Debug/net9.0/app.db
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/bin/Debug/net9.0/net9.0/appsettings.Development.json
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/bin/Debug/net9.0/net9.0/appsettings.json
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/bin/Debug/net9.0/net9.0/OnlineShop.deps.json
@@ -428,7 +427,6 @@ C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.0/staticwebassets.development.json
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.0/staticwebassets.build.endpoints.json
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.0/swae.build.ex.cache
-C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.0/staticwebassets.upToDateCheck.txt
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.0/OnlineShop.csproj.Up2Date
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.0/OnlineShop.dll
 C:/Users/maria/OneDrive/Desktop/Facultate/Online-Shop/OnlineShop/obj/Debug/net9.0/refint/OnlineShop.dll
@@ -1913,7 +1911,6 @@ C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\net9.0\OnlineShop.staticwebassets.endpoints.json
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\net9.0\OnlineShop.staticwebassets.runtime.json
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\OnlineShop.staticwebassets.endpoints.json
-C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\app.db
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\OnlineShop.staticwebassets.runtime.json
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\OnlineShop.exe
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\OnlineShop.deps.json
@@ -2236,10 +2233,11 @@ C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\staticwebassets.build.endpoints.json
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\swae.build.ex.cache
-C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\OnlineShop.csproj.Up2Date
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\OnlineShop.dll
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\refint\OnlineShop.dll
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\OnlineShop.pdb
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\OnlineShop.genruntimeconfig.cache
 C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\ref\OnlineShop.dll
+C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\obj\Debug\net9.0\OnlineShop.sourcelink.json
+C:\Users\maria\OneDrive\Desktop\Facultate\Online-Shop\OnlineShop\bin\Debug\net9.0\app.db

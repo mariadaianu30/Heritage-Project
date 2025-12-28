@@ -1,0 +1,8 @@
+[12/28/2025 3:56:28 PM] Create Post Started
+Form Keys: Title, Description, Price, __Invariant, Stock, CategoryId, ColorId, Size, Materials[0].Material, Materials[1].Material, __RequestVerificationToken
+[12/28/2025 3:56:28 PM] Manual parsing found 0 materials. Keeping model materials: 2
+[12/28/2025 4:00:12 PM] Create Post Started
+Form Keys: Title, Description, Price, __Invariant, Stock, CategoryId, ColorId, Size, Materials[0].Material, Materials[0].Percentage, Materials[1].Material, Materials[1].Percentage, __RequestVerificationToken
+[12/28/2025 4:00:12 PM] Found Input: Materials[0].Material=Bumbac, Materials[0].Percentage=20
+[12/28/2025 4:00:12 PM] Found Input: Materials[1].Material=Viscoza, Materials[1].Percentage=30
+[12/28/2025 4:00:12 PM] Manual parsing found 2 materials. Overwriting model.

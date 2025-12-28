@@ -12,7 +12,10 @@ namespace OnlineShop.Models
 
         // ===== DbSets =====
         public DbSet<Category> Categories { get; set; } = null!;
-        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductMaterial> ProductMaterials { get; set; }
+
         public DbSet<Review> Reviews { get; set; } = null!;
         public DbSet<Cart> Carts { get; set; } = null!;
         public DbSet<CartItem> CartItems { get; set; } = null!;
@@ -56,6 +59,20 @@ namespace OnlineShop.Models
                       .HasForeignKey(p => p.CollaboratorId)
                       .OnDelete(DeleteBehavior.SetNull);
             });
+            modelBuilder.Entity<Color>().HasData(
+                  new Color { Id = 1, Name = "Negru", HexCode = "#000000" },
+                  new Color { Id = 2, Name = "Alb", HexCode = "#FFFFFF" },
+                  new Color { Id = 3, Name = "Roșu", HexCode = "#FF0000" },
+                  new Color { Id = 4, Name = "Albastru", HexCode = "#0000FF" },
+                  new Color { Id = 5, Name = "Galben", HexCode = "#FFFF00" },
+                  new Color { Id = 6, Name = "Portocaliu", HexCode = "#FFA500" },
+                  new Color { Id = 7, Name = "Verde", HexCode = "#008000" },
+                  new Color { Id = 8, Name = "Roz", HexCode = "#FFC0CB" },
+                  new Color { Id = 9, Name = "Violet", HexCode = "#800080" },
+                  new Color { Id = 10, Name = "Maro", HexCode = "#A52A2A" },
+                  new Color { Id = 11, Name = "Gri", HexCode = "#808080" },
+                  new Color { Id = 12, Name = "Bej", HexCode = "#F5F5DC" }
+              );
 
             // ===== REVIEW =====
             modelBuilder.Entity<Review>(entity =>

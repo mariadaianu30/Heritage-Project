@@ -1,4 +1,5 @@
 ﻿@model OnlineShop.Models.Product
+@using OnlineShop.Models.Enums
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 
@@ -7,7 +8,8 @@
 }
 
 <div class="product-detail-container">
-    @* Product Image *@
+
+    <!-- Product Image -->
     <div>
         @if (!string.IsNullOrEmpty(Model.ImagePath))
         {
@@ -23,15 +25,16 @@
         }
     </div>
 
-    @* Product Info *@
+    <!-- Product Info -->
     <div class="product-detail-info">
+
         @if (Model.Category != null)
         {
             <span class="product-detail-brand">@Model.Category.Name</span>
         }
-        
+
         <h1 class="product-detail-title">@Model.Title</h1>
-        
+
         <div class="product-detail-price mb-4">
             @Model.Price.ToString("N2") RON
         </div>
@@ -43,85 +46,122 @@
             </div>
         }
 
-        @* Product Specs *@
+        <!-- Specs -->
         <ul class="product-detail-specs">
-            @if (Model.Stock > 0)
+            <li><strong>Stoc:</strong> @(Model.Stock > 0 ? $"{Model.Stock} bucăți disponibile" : "Indisponibil")</li>
+
+            @if (Model.Color != null)
             {
-                <li><strong>Stoc:</strong> @Model.Stock bucăți disponibile</li>
+                <li><strong>Culoare:</strong> @Model.Color.Name</li>
             }
-            else
-            {
-                <li><strong>Stoc:</strong> Indisponibil</li>
-            }
-            
-            @if (Model.Category != null)
-            {
-                <li><strong>Categorie:</strong> @Model.Category.Name</li>
-            }
-            
+
+            <li><strong>Mărime:</strong> @Model.Size</li>
+
             @if (Model.AverageRating.HasValue)
             {
                 <li><strong>Rating:</strong> @Model.AverageRating.Value.ToString("N1") / 5</li>
             }
         </ul>
 
-        @* Add to Cart & Wishlist *@
-        @if (Model.IsAvailable && Model.Stock > 0 && !User.IsInRole("Admin"))
+        <!-- Materiale -->
+        @if (Model.Materials != null && Model.Materials.Count > 0)
         {
-            <div class="mt-4">
-                <form asp-controller="Carts"
-                      asp-action="Add"
-                      method="post"
-                      class="mb-3">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="productId" value="@Model.Id" />
-                    
-                    <div class="d-flex gap-3 align-items-end flex-wrap">
-                        <div>
-                            <label class="form-label">Cantitate</label>
-                            <input type="number"
-                                   name="quantity"
-                                   value="1"
-                                   min="1"
-                                   max="@Model.Stock"
-                                   class="form-control"
-                                   style="width: 100px;" />
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">
-                            Adaugă în coș
-                        </button>
-                    </div>
-                </form>
+            <div class="mb-3">
+                <strong>Materiale:</strong>
+                <ul class="mb-0">
+                    @foreach (var material in Model.Materials)
+                    {
+                        <li>@material.Material – @material.Percentage%</li>
+                    }
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div class="mb-3">
+                <strong>Materiale:</strong> Nu sunt specificate materiale pentru acest produs.
+            </div>
+        }
 
-                @* Add to Wishlist *@
-                @if (User.Identity!.IsAuthenticated &&
-                            (User.IsInRole("User") || User.IsInRole("Collaborator")))
-                {
-                    <form asp-controller="Wishlists"
+        <!-- Actions -->
+        <div class="mt-4">
+            @if (User.IsInRole("Admin") || (User.IsInRole("Collaborator") && Model.CollaboratorId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value))
+            {
+                <div class="mb-3">
+                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editează Produs</a>
+                    <a asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Șterge Produs</a>
+                </div>
+            }
+
+            @if (Model.IsAvailable && Model.Stock > 0 && !User.IsInRole("Admin"))
+            {
+                <div class="mt-4">
+
+                    <form asp-controller="Carts"
                           asp-action="Add"
                           method="post"
-                          class="d-inline">
+                          class="mb-3">
+
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="productId" value="@Model.Id" />
-                        <button type="submit" class="btn btn-secondary">
-                            <i class="fas fa-heart me-1"></i>Adaugă la wishlist
-                        </button>
+                        <input type="hidden" name="colorId" value="@Model.ColorId" />
+                        <input type="hidden" name="size" value="@Model.Size" />
+
+                        <div class="row g-3 align-items-end">
+                            <!-- Quantity -->
+                            <div class="col-md-4">
+                                <label class="form-label">Cantitate</label>
+                                <input type="number"
+                                       name="quantity"
+                                       value="1"
+                                       min="1"
+                                       max="@Model.Stock"
+                                       class="form-control" />
+                            </div>
+                            
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary w-100" style="margin-top: 30px;">
+                                    Adaugă în coș
+                                </button>
+                            </div>
+                        </div>
                     </form>
-                }
-            </div>
-        }
-        else if (!Model.IsAvailable && Model.Stock == 0 && !User.IsInRole("Admin"))
-        {
-            <div class="alert alert-warning mt-4">
-                Acest produs nu este disponibil momentan.
-            </div>
-        }
+
+                    <!-- Wishlist -->
+                    @if (User.Identity!.IsAuthenticated &&
+                        (User.IsInRole("User") || User.IsInRole("Collaborator")))
+                    {
+                        <form asp-controller="Wishlists"
+                              asp-action="Add"
+                              method="post"
+                              class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="productId" value="@Model.Id" />
+                            
+                            @if (ViewBag.InWishlist == true)
+                            {
+                                <button type="submit" class="btn btn-outline-secondary" disabled>
+                                    <i class="fas fa-heart text-danger me-1"></i>
+                                    Produs adăugat în wishlist
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-outline-secondary">
+                                    <i class="far fa-heart me-1"></i>
+                                    Adaugă la wishlist
+                                </button>
+                            }
+                        </form>
+                    }
+                </div>
+            }
+            else if (!Model.IsAvailable && !User.IsInRole("Admin"))
+            {
+                <div class="alert alert-warning mt-4">
+                    Acest produs nu este disponibil momentan.
+                </div>
+            }
+        </div>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        // Wishlist functionality can be added here if needed
-    </script>
-}

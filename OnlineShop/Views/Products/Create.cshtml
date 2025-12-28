@@ -10,7 +10,6 @@
 {
     <div class="alert alert-success">@TempData["Success"]</div>
 }
-
 @if (TempData["Warning"] != null)
 {
     <div class="alert alert-warning">@TempData["Warning"]</div>
@@ -37,16 +36,24 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
+    <input type="hidden" asp-for="Stock" value="1" />
+
     <div class="mb-3">
-        <label asp-for="Stock" class="form-label"></label>
-        <input asp-for="Stock" class="form-control" type="number" />
-        <span asp-validation-for="Stock" class="text-danger"></span>
+        <label asp-for="CategoryId" class="form-label">Categorie</label>
+        <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="CategoryId" class="form-label"></label>
-        <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories"></select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <label asp-for="ColorId" class="form-label">Culoare</label>
+        <select asp-for="ColorId" class="form-select" asp-items="ViewBag.Colors"></select>
+        <span asp-validation-for="ColorId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Size" class="form-label"></label>
+        <select asp-for="Size" class="form-select" asp-items="ViewBag.Sizes"></select>
+        <span asp-validation-for="Size" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -55,10 +62,174 @@
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Adaugă produs</button>
-    <a asp-action="Index" class="btn btn-secondary">Înapoi la produse</a>
+    <hr />
+    <h4>Materiale produs</h4>
+    
+    <div class="mb-3">
+        <label class="form-label">Adaugă material</label>
+        <div class="row g-2">
+            <div class="col-md-5">
+                <select id="new-material-select" class="form-select">
+                    @{
+                        var materialTypes = Enum.GetValues(typeof(OnlineShop.Models.Enums.MaterialType))
+                            .Cast<OnlineShop.Models.Enums.MaterialType>();
+                    }
+                    @foreach (var mat in materialTypes)
+                    {
+                        <option value="@mat">@mat</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input id="new-material-percentage" class="form-control" placeholder="Procentaj (%)" type="number" min="1" max="100" />
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="add-material" class="btn btn-secondary w-100">Adaugă material</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="materials-container">
+        <h5 class="mt-3 mb-2">Materiale adăugate</h5>
+        <div id="materials-list">
+            @if (Model.Materials != null && Model.Materials.Any())
+            {
+                for (int i = 0; i < Model.Materials.Count; i++)
+                {
+                    <div class="material-item mb-2 p-2 border rounded">
+                        <div class="row align-items-center">
+                            <div class="col-md-5">
+                                <strong>@Model.Materials[i].Material</strong>
+                            </div>
+                            <div class="col-md-4">
+                                <span>@Model.Materials[i].Percentage%</span>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-danger btn-sm w-100 remove-material">Șterge</button>
+                            </div>
+                        </div>
+                        <input type="hidden" class="js-material-input" name="Materials[@i].Material" value="@Model.Materials[i].Material" />
+                        <input type="hidden" class="js-percentage-input" name="Materials[@i].Percentage" value="@Model.Materials[i].Percentage" />
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted">Nu există materiale adăugate.</p>
+            }
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Adaugă produs</button>
+        <a asp-action="Index" class="btn btn-secondary">Înapoi la produse</a>
+    </div>
 </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var materialsList = $("#materials-list");
+            var materialSelect = $("#new-material-select");
+            var percentageInput = $("#new-material-percentage");
+
+            function updateIndexes() {
+                var items = materialsList.find(".material-item");
+                items.each(function (i, item) {
+                    var $item = $(item);
+                    $item.find(".js-material-input").attr("name", "Materials[" + i + "].Material");
+                    $item.find(".js-percentage-input").attr("name", "Materials[" + i + "].Percentage");
+                });
+                
+                // Update placeholder text if no materials
+                if (items.length === 0) {
+                    if (materialsList.find("p.text-muted").length === 0) {
+                        materialsList.html('<p class="text-muted">Nu există materiale adăugate.</p>');
+                    }
+                } else {
+                    materialsList.find("p.text-muted").remove();
+                }
+            }
+
+            $("#add-material").click(function (e) {
+                e.preventDefault();
+                var material = materialSelect.val();
+                var materialName = materialSelect.find("option:selected").text();
+                var percentageValue = percentageInput.val().trim();
+                var percentage = parseInt(percentageValue, 10);
+
+                // Validare procentaj
+                if (!percentageValue || isNaN(percentage) || percentage < 1 || percentage > 100) {
+                    alert("Te rog introdu un procentaj valid între 1 și 100!");
+                    percentageInput.focus();
+                    return;
+                }
+
+                // Verifică dacă materialul există deja
+                var existingMaterials = materialsList.find(".material-item");
+                var materialExists = false;
+                existingMaterials.each(function() {
+                    var existingMaterial = $(this).find(".js-material-input").val();
+                    if (existingMaterial === material) {
+                        materialExists = true;
+                        return false; // break
+                    }
+                });
+
+                if (materialExists) {
+                    alert("Acest material a fost deja adăugat!");
+                    return;
+                }
+
+                // Obține indexul corect
+                var currentIndex = materialsList.find(".material-item").length;
+
+                var html = '<div class="material-item mb-2 p-2 border rounded">' +
+                    '<div class="row align-items-center">' +
+                    '<div class="col-md-5">' +
+                    '<strong>' + escapeHtml(materialName) + '</strong>' +
+                    '</div>' +
+                    '<div class="col-md-4">' +
+                    '<span>' + percentage + '%</span>' +
+                    '</div>' +
+                    '<div class="col-md-3">' +
+                    '<button type="button" class="btn btn-danger btn-sm w-100 remove-material">Șterge</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '<input type="hidden" class="js-material-input" name="Materials[' + currentIndex + '].Material" value="' + escapeHtml(material) + '" />' +
+                    '<input type="hidden" class="js-percentage-input" name="Materials[' + currentIndex + '].Percentage" value="' + percentage.toString() + '" />' +
+                    '</div>';
+
+                // Remove placeholder if exists
+                materialsList.find("p.text-muted").remove();
+                materialsList.append(html);
+                
+                // Clear inputs
+                percentageInput.val('');
+                
+                updateIndexes();
+            });
+
+            materialsList.on("click", ".remove-material", function () {
+                $(this).closest(".material-item").remove();
+                updateIndexes();
+            });
+
+            function escapeHtml(text) {
+                var map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                };
+                return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+            }
+
+            updateIndexes(); // indexează materialele deja existente
+        });
+    </script>
 }
+

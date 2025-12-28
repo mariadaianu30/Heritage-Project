@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Acces interzis";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="text-center">
+            <h1 class="display-4 mb-4">
+                <i class="fas fa-lock text-danger"></i>
+            </h1>
+            <h2 class="mb-3">@ViewData["Title"]</h2>
+            <p class="lead mb-4">
+                Nu ai permisiunea de a accesa această resursă.
+            </p>
+            <p class="text-muted mb-4">
+                Dacă crezi că ar trebui să ai acces, te rugăm să contactezi administratorul.
+            </p>
+            <div class="mt-4">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary me-2">
+                    <i class="fas fa-home me-1"></i>Înapoi la pagina principală
+                </a>
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary">
+                    <i class="fas fa-sign-in-alt me-1"></i>Autentificare
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

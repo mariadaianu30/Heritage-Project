@@ -1,0 +1,63 @@
+# Visual Studio
+.vs/
+[Oo]bj/
+[Bb]in/
+[Dd]ebug/
+[Rr]elease/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Thumbnails
+._*
+Thumbs.db
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core
+**/appsettings.Development.json
+**/appsettings.Production.json
+# Sensitive data in appsettings.json should be handled via User Secrets or environment variables
+# but sometimes users modify this. Keeping it tracked usually, strict ignore if requested.
+# For now, sticking to standard.
+
+# Migration backups
+*.bak
+
+# Rider
+.idea/
+*.sln.iml

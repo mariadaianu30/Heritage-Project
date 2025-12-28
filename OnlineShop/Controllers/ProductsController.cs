@@ -4,29 +4,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Models;
+using OnlineShop.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Controllers
 {
+    [Authorize(Roles = "Admin,Collaborator")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductsController(
-            ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager,
-            IWebHostEnvironment webHostEnvironment)
+        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: /Products
-        // Lista produselor (Admin vede toate, Collaborator vede doar ale lui)
-        [Authorize(Roles = "Admin,Collaborator")]
+        // ===== LISTARE =====
         public async Task<IActionResult> Index(ProductStatus? status)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -35,15 +32,12 @@ namespace OnlineShop.Controllers
             var products = _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Collaborator)
+                .Include(p => p.Color)
                 .AsQueryable();
 
-            // Collaboratorul vede doar produsele proprii
             if (!isAdmin)
-            {
                 products = products.Where(p => p.CollaboratorId == user!.Id);
-            }
 
-            // Filtrare după status
             if (status.HasValue)
             {
                 products = products.Where(p => p.Status == status.Value);
@@ -55,14 +49,14 @@ namespace OnlineShop.Controllers
             return View(await products.OrderByDescending(p => p.CreatedAt).ToListAsync());
         }
 
-        // GET: /Products/Pending
-        // Produse în așteptare pentru aprobare (doar Admin)
+        // ===== PRODUSE PENDING =====
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Pending()
         {
             var products = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Collaborator)
+                .Include(p => p.Color)
                 .Where(p => p.Status == ProductStatus.Pending)
                 .OrderBy(p => p.CreatedAt)
                 .ToListAsync();
@@ -70,53 +64,119 @@ namespace OnlineShop.Controllers
             return View(products);
         }
 
-        // GET: /Products/Details/5
-        [Authorize(Roles = "Admin,Collaborator")]
+        // ===== DETALII =====
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var product = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Collaborator)
+                .Include(p => p.Color)
+                .Include(p => p.Materials)
                 .Include(p => p.Reviews)
                     .ThenInclude(r => r.User)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
-            // Verifică dacă utilizatorul are acces
             var user = await _userManager.GetUserAsync(User);
             var isAdmin = User.IsInRole("Admin");
 
-            if (!isAdmin && product.CollaboratorId != user!.Id)
-            {
-                return Forbid();
-            }
+            if (!isAdmin && product.CollaboratorId != user!.Id) return Forbid();
 
             return View(product);
         }
 
-        // GET: /Products/Create
-        [Authorize(Roles = "Admin,Collaborator")]
+        // ===== CREATE =====
         public async Task<IActionResult> Create()
         {
+            var model = new ProductCreateViewModel
+            {
+                Stock = 1 // Stock implicit 1
+            };
+
             ViewBag.Categories = new SelectList(await _context.Categories.ToListAsync(), "Id", "Name");
-            return View();
+            ViewBag.Colors = new SelectList(await _context.Colors.ToListAsync(), "Id", "Name");
+            ViewBag.Sizes = Enum.GetValues<ProductSize>().Select(s => new SelectListItem { Value = s.ToString(), Text = s.ToString() });
+
+            return View(model);
         }
 
-        // POST: /Products/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Collaborator")]
         public async Task<IActionResult> Create(ProductCreateViewModel model)
         {
+            // Curăță erorile existente pentru materiale din ModelState
+            var keysToRemove = ModelState.Keys.Where(k => k.StartsWith("Materials[")).ToList();
+            foreach (var key in keysToRemove)
+            {
+                ModelState.Remove(key);
+            }
+
+            // Procesează materialele din form
+            var materials = new List<ProductMaterialViewModel>();
+            var materialKeys = Request.Form.Keys.Where(k => k.StartsWith("Materials[") && k.Contains(".Material"));
+            
+            var materialIndices = new HashSet<int>();
+            foreach (var key in materialKeys)
+            {
+                var match = System.Text.RegularExpressions.Regex.Match(key, @"Materials\[(\d+)\]\.Material");
+                if (match.Success)
+                {
+                    materialIndices.Add(int.Parse(match.Groups[1].Value));
+                }
+            }
+
+            foreach (var index in materialIndices.OrderBy(i => i))
+            {
+                var materialKey = $"Materials[{index}].Material";
+                var percentageKey = $"Materials[{index}].Percentage";
+                
+                if (Request.Form.ContainsKey(materialKey) && Request.Form.ContainsKey(percentageKey))
+                {
+                    var materialStr = Request.Form[materialKey].ToString().Trim();
+                    var percentageStr = Request.Form[percentageKey].ToString().Trim();
+                    
+                    // Validare și procesare
+                    if (string.IsNullOrEmpty(materialStr) || string.IsNullOrEmpty(percentageStr))
+                    {
+                        continue; // Skip materiale incomplete
+                    }
+                    
+                    if (!Enum.TryParse<MaterialType>(materialStr, true, out var materialType))
+                    {
+                        ModelState.AddModelError(materialKey, "Materialul selectat nu este valid.");
+                        continue;
+                    }
+                    
+                    if (!int.TryParse(percentageStr, out var percentage))
+                    {
+                        ModelState.AddModelError(percentageKey, "Procentajul trebuie să fie un număr valid.");
+                        continue;
+                    }
+                    
+                    if (percentage < 1 || percentage > 100)
+                    {
+                        ModelState.AddModelError(percentageKey, "Procentajul trebuie să fie între 1 și 100.");
+                        continue;
+                    }
+                    
+                    // Material valid - adaugă-l
+                    materials.Add(new ProductMaterialViewModel
+                    {
+                        Material = materialType,
+                        Percentage = percentage
+                    });
+                }
+            }
+            
+            if (materials.Any())
+            {
+                model.Materials = materials;
+            }
+
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -125,16 +185,18 @@ namespace OnlineShop.Controllers
                 // Upload imagine
                 string imagePath = await UploadImage(model.Image);
 
+                // Creează produsul
                 var product = new Product
                 {
                     Title = model.Title,
                     Description = model.Description,
-                    ImagePath = imagePath,
                     Price = model.Price,
-                    Stock = model.Stock,
+                    Stock = 1, // Stock implicit 1
                     CategoryId = model.CategoryId,
+                    Size = model.Size,
+                    ColorId = model.ColorId,
+                    ImagePath = imagePath,
                     CollaboratorId = isAdmin ? null : user!.Id,
-                    // Admin-ul adaugă direct produse aprobate, Collaboratorul trebuie să aștepte
                     Status = isAdmin ? ProductStatus.Approved : ProductStatus.Pending,
                     CreatedAt = DateTime.UtcNow
                 };
@@ -142,89 +204,164 @@ namespace OnlineShop.Controllers
                 _context.Add(product);
                 await _context.SaveChangesAsync();
 
-                if (isAdmin)
+                // ===== SALVARE MATERIALE =====
+                if (model.Materials != null && model.Materials.Any())
                 {
-                    TempData["Success"] = "Produsul a fost adăugat cu succes!";
+                    foreach (var mat in model.Materials)
+                    {
+                        // Verifică din nou înainte de salvare
+                        if (Enum.IsDefined(typeof(MaterialType), mat.Material) && 
+                            mat.Percentage >= 1 && mat.Percentage <= 100)
+                        {
+                            var productMaterial = new ProductMaterial
+                            {
+                                ProductId = product.Id,
+                                Material = mat.Material,
+                                Percentage = mat.Percentage
+                            };
+                            _context.ProductMaterials.Add(productMaterial);
+                        }
+                    }
+                    await _context.SaveChangesAsync();
                 }
-                else
-                {
-                    TempData["Success"] = "Produsul a fost trimis spre aprobare!";
-                }
+
+
+                TempData["Success"] = isAdmin
+                    ? "Produsul a fost adăugat cu succes!"
+                    : "Produsul a fost trimis spre aprobare!";
 
                 return RedirectToAction(nameof(Index));
             }
 
+            // Re-populează dropdown-urile în caz de eroare
             ViewBag.Categories = new SelectList(await _context.Categories.ToListAsync(), "Id", "Name", model.CategoryId);
+            ViewBag.Colors = new SelectList(await _context.Colors.ToListAsync(), "Id", "Name", model.ColorId);
+            ViewBag.Sizes = Enum.GetValues<ProductSize>().Select(s => new SelectListItem { Value = s.ToString(), Text = s.ToString() });
+
             return View(model);
         }
 
-        // GET: /Products/Edit/5
-        [Authorize(Roles = "Admin,Collaborator")]
+
+        // ===== EDIT =====
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            var product = await _context.Products
+                .Include(p => p.Materials)
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null) return NotFound();
 
-            // Verifică dacă utilizatorul are acces
             var user = await _userManager.GetUserAsync(User);
             var isAdmin = User.IsInRole("Admin");
-
-            if (!isAdmin && product.CollaboratorId != user!.Id)
-            {
-                return Forbid();
-            }
+            if (!isAdmin && product.CollaboratorId != user!.Id) return Forbid();
 
             var model = new ProductEditViewModel
             {
                 Id = product.Id,
                 Title = product.Title,
                 Description = product.Description,
-                CurrentImagePath = product.ImagePath,
                 Price = product.Price,
                 Stock = product.Stock,
                 CategoryId = product.CategoryId,
-                Status = product.Status
+                Size = product.Size,
+                ColorId = product.ColorId,
+                Status = product.Status,
+                CurrentImagePath = product.ImagePath,
+                AdminFeedback = product.AdminFeedback,
+                Materials = product.Materials.Select(m => new ProductMaterialViewModel
+                {
+                    Material = m.Material,
+                    Percentage = m.Percentage
+                }).ToList()
             };
 
             ViewBag.Categories = new SelectList(await _context.Categories.ToListAsync(), "Id", "Name", product.CategoryId);
+            ViewBag.Colors = new SelectList(await _context.Colors.ToListAsync(), "Id", "Name", product.ColorId);
+            ViewBag.Sizes = Enum.GetValues<ProductSize>().Select(s => new SelectListItem { Value = s.ToString(), Text = s.ToString() });
             ViewBag.IsAdmin = isAdmin;
 
             return View(model);
         }
 
-        // POST: /Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Collaborator")]
         public async Task<IActionResult> Edit(int id, ProductEditViewModel model)
         {
-            if (id != model.Id)
-            {
-                return NotFound();
-            }
+            if (id != model.Id) return NotFound();
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            var product = await _context.Products
+                .Include(p => p.Materials)
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null) return NotFound();
 
-            // Verifică dacă utilizatorul are acces
             var user = await _userManager.GetUserAsync(User);
             var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin && product.CollaboratorId != user!.Id) return Forbid();
 
-            if (!isAdmin && product.CollaboratorId != user!.Id)
+            // Curăță erorile existente pentru materiale din ModelState
+            var keysToRemove = ModelState.Keys.Where(k => k.StartsWith("Materials[")).ToList();
+            foreach (var key in keysToRemove)
             {
-                return Forbid();
+                ModelState.Remove(key);
             }
+
+            // Procesează materialele din form
+            var materials = new List<ProductMaterialViewModel>();
+            var materialKeys = Request.Form.Keys.Where(k => k.StartsWith("Materials[") && k.Contains(".Material"));
+            
+            var materialIndices = new HashSet<int>();
+            foreach (var key in materialKeys)
+            {
+                var match = System.Text.RegularExpressions.Regex.Match(key, @"Materials\[(\d+)\]\.Material");
+                if (match.Success)
+                {
+                    materialIndices.Add(int.Parse(match.Groups[1].Value));
+                }
+            }
+
+            foreach (var index in materialIndices.OrderBy(i => i))
+            {
+                var materialKey = $"Materials[{index}].Material";
+                var percentageKey = $"Materials[{index}].Percentage";
+                
+                if (Request.Form.ContainsKey(materialKey) && Request.Form.ContainsKey(percentageKey))
+                {
+                    var materialStr = Request.Form[materialKey].ToString().Trim();
+                    var percentageStr = Request.Form[percentageKey].ToString().Trim();
+                    
+                    if (string.IsNullOrEmpty(materialStr) || string.IsNullOrEmpty(percentageStr))
+                    {
+                        continue;
+                    }
+                    
+                    if (!Enum.TryParse<MaterialType>(materialStr, true, out var materialType))
+                    {
+                        ModelState.AddModelError(materialKey, "Materialul selectat nu este valid.");
+                        continue;
+                    }
+                    
+                    if (!int.TryParse(percentageStr, out var percentage))
+                    {
+                        ModelState.AddModelError(percentageKey, "Procentajul trebuie să fie un număr valid.");
+                        continue;
+                    }
+                    
+                    if (percentage < 1 || percentage > 100)
+                    {
+                        ModelState.AddModelError(percentageKey, "Procentajul trebuie să fie între 1 și 100.");
+                        continue;
+                    }
+                    
+                    materials.Add(new ProductMaterialViewModel
+                    {
+                        Material = materialType,
+                        Percentage = percentage
+                    });
+                }
+            }
+            
+            model.Materials = materials;
 
             if (ModelState.IsValid)
             {
@@ -235,17 +372,41 @@ namespace OnlineShop.Controllers
                     product.Price = model.Price;
                     product.Stock = model.Stock;
                     product.CategoryId = model.CategoryId;
+                    product.Size = model.Size;
+                    product.ColorId = model.ColorId;
                     product.UpdatedAt = DateTime.UtcNow;
 
-                    // Upload imagine nouă dacă există
                     if (model.NewImage != null)
                     {
-                        // Șterge imaginea veche
                         DeleteImage(product.ImagePath);
                         product.ImagePath = await UploadImage(model.NewImage);
                     }
 
-                    // Colaboratorul care editează - produsul revine în Pending
+                    // ===== ACTUALIZARE MATERIALE =====
+                    // Șterge materialele existente
+                    var existingMaterials = await _context.ProductMaterials
+                        .Where(pm => pm.ProductId == product.Id)
+                        .ToListAsync();
+                    _context.ProductMaterials.RemoveRange(existingMaterials);
+
+                    // Adaugă materialele noi
+                    if (model.Materials != null && model.Materials.Any())
+                    {
+                        foreach (var mat in model.Materials)
+                        {
+                            if (Enum.IsDefined(typeof(MaterialType), mat.Material) && 
+                                mat.Percentage >= 1 && mat.Percentage <= 100)
+                            {
+                                _context.ProductMaterials.Add(new ProductMaterial
+                                {
+                                    ProductId = product.Id,
+                                    Material = mat.Material,
+                                    Percentage = mat.Percentage
+                                });
+                            }
+                        }
+                    }
+
                     if (!isAdmin && product.Status == ProductStatus.Approved)
                     {
                         product.Status = ProductStatus.Pending;
@@ -261,10 +422,7 @@ namespace OnlineShop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.Id))
-                    {
-                        return NotFound();
-                    }
+                    if (!ProductExists(product.Id)) return NotFound();
                     throw;
                 }
 
@@ -272,62 +430,44 @@ namespace OnlineShop.Controllers
             }
 
             ViewBag.Categories = new SelectList(await _context.Categories.ToListAsync(), "Id", "Name", model.CategoryId);
+            ViewBag.Colors = new SelectList(await _context.Colors.ToListAsync(), "Id", "Name", model.ColorId);
+            ViewBag.Sizes = Enum.GetValues<ProductSize>().Select(s => new SelectListItem { Value = s.ToString(), Text = s.ToString() });
             ViewBag.IsAdmin = isAdmin;
 
             return View(model);
         }
 
-        // GET: /Products/Delete/5
-        [Authorize(Roles = "Admin,Collaborator")]
+        // ===== DELETE =====
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var product = await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Collaborator)
+                .Include(p => p.Color)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
-            // Verifică dacă utilizatorul are acces
             var user = await _userManager.GetUserAsync(User);
             var isAdmin = User.IsInRole("Admin");
-
-            if (!isAdmin && product.CollaboratorId != user!.Id)
-            {
-                return Forbid();
-            }
+            if (!isAdmin && product.CollaboratorId != user!.Id) return Forbid();
 
             return View(product);
         }
 
-        // POST: /Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Collaborator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);
-
             if (product != null)
             {
-                // Verifică dacă utilizatorul are acces
                 var user = await _userManager.GetUserAsync(User);
                 var isAdmin = User.IsInRole("Admin");
+                if (!isAdmin && product.CollaboratorId != user!.Id) return Forbid();
 
-                if (!isAdmin && product.CollaboratorId != user!.Id)
-                {
-                    return Forbid();
-                }
-
-                // Verifică dacă produsul are comenzi active
                 var hasOrders = await _context.OrderItems.AnyAsync(oi => oi.ProductId == id);
                 if (hasOrders)
                 {
@@ -335,7 +475,6 @@ namespace OnlineShop.Controllers
                     return RedirectToAction(nameof(Index));
                 }
 
-                // Șterge imaginea
                 DeleteImage(product.ImagePath);
 
                 _context.Products.Remove(product);
@@ -347,19 +486,14 @@ namespace OnlineShop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: /Products/Approve/5
-        // Aprobare produs (doar Admin)
+        // ===== APPROVE / REJECT =====
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Approve(int id, string? feedback)
         {
             var product = await _context.Products.FindAsync(id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             product.Status = ProductStatus.Approved;
             product.AdminFeedback = feedback;
@@ -371,19 +505,13 @@ namespace OnlineShop.Controllers
             return RedirectToAction(nameof(Pending));
         }
 
-        // POST: /Products/Reject/5
-        // Respingere produs (doar Admin)
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Reject(int id, string feedback)
         {
             var product = await _context.Products.FindAsync(id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             if (string.IsNullOrWhiteSpace(feedback))
             {
@@ -401,26 +529,17 @@ namespace OnlineShop.Controllers
             return RedirectToAction(nameof(Pending));
         }
 
-        // ===== HELPER METHODS =====
-
+        // ===== HELPERS =====
         private async Task<string> UploadImage(IFormFile image)
         {
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products");
+            if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
 
-            // Creează folderul dacă nu există
-            if (!Directory.Exists(uploadsFolder))
-            {
-                Directory.CreateDirectory(uploadsFolder);
-            }
-
-            // Generează nume unic pentru fișier
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+            string uniqueFileName = Guid.NewGuid() + "_" + image.FileName;
             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await image.CopyToAsync(fileStream);
-            }
+            using var fileStream = new FileStream(filePath, FileMode.Create);
+            await image.CopyToAsync(fileStream);
 
             return "/images/products/" + uniqueFileName;
         }
@@ -430,85 +549,112 @@ namespace OnlineShop.Controllers
             if (!string.IsNullOrEmpty(imagePath))
             {
                 string fullPath = Path.Combine(_webHostEnvironment.WebRootPath, imagePath.TrimStart('/'));
-                if (System.IO.File.Exists(fullPath))
-                {
-                    System.IO.File.Delete(fullPath);
-                }
+                if (System.IO.File.Exists(fullPath)) System.IO.File.Delete(fullPath);
             }
         }
 
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.Id == id);
-        }
+        private bool ProductExists(int id) => _context.Products.Any(p => p.Id == id);
     }
 
+
+
     // ===== VIEW MODELS =====
+
+    public class ProductMaterialViewModel
+    {
+        [Required(ErrorMessage = "Materialul este obligatoriu")]
+        [Display(Name = "Material")]
+        public MaterialType Material { get; set; }
+
+        [Required(ErrorMessage = "Procentajul este obligatoriu")]
+        [Range(1, 100, ErrorMessage = "Procentajul trebuie să fie între 1 și 100")]
+        [Display(Name = "Procentaj (%)")]
+        public int Percentage { get; set; }
+    }
 
     public class ProductCreateViewModel
     {
         [Required(ErrorMessage = "Titlul este obligatoriu")]
-        [StringLength(200, MinimumLength = 3, ErrorMessage = "Titlul trebuie să aibă între 3 și 200 caractere")]
-        [Display(Name = "Titlu")]
+        [StringLength(200, MinimumLength = 3)]
         public string Title { get; set; } = null!;
 
         [Required(ErrorMessage = "Descrierea este obligatorie")]
-        [StringLength(2000, MinimumLength = 10, ErrorMessage = "Descrierea trebuie să aibă între 10 și 2000 caractere")]
-        [Display(Name = "Descriere")]
+        [StringLength(2000, MinimumLength = 10)]
         public string Description { get; set; } = null!;
 
         [Required(ErrorMessage = "Imaginea este obligatorie")]
-        [Display(Name = "Imagine")]
         public IFormFile Image { get; set; } = null!;
 
-        [Required(ErrorMessage = "Prețul este obligatoriu")]
-        [Range(0.01, 1000000, ErrorMessage = "Prețul trebuie să fie mai mare decât 0")]
-        [Display(Name = "Preț (RON)")]
+        [Required]
+        [Range(0.01, 1_000_000)]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "Stocul este obligatoriu")]
-        [Range(0, int.MaxValue, ErrorMessage = "Stocul nu poate fi negativ")]
-        [Display(Name = "Stoc")]
+        [Required]
+        [Range(0, int.MaxValue)]
         public int Stock { get; set; }
 
-        [Required(ErrorMessage = "Categoria este obligatorie")]
-        [Display(Name = "Categorie")]
+        [Required]
         public int CategoryId { get; set; }
+
+        [Required]
+        public ProductSize Size { get; set; }
+
+        [Required]
+        public int ColorId { get; set; }
+
+        // ===== MATERIALE =====
+        [Display(Name = "Materiale produs")]
+        public List<ProductMaterialViewModel> Materials { get; set; } = new List<ProductMaterialViewModel>();
     }
 
     public class ProductEditViewModel
     {
+        [Required]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Titlul este obligatoriu")]
-        [StringLength(200, MinimumLength = 3, ErrorMessage = "Titlul trebuie să aibă între 3 și 200 caractere")]
-        [Display(Name = "Titlu")]
+        [StringLength(200, MinimumLength = 3)]
+        [Display(Name = "Titlu Produs")]
         public string Title { get; set; } = null!;
 
         [Required(ErrorMessage = "Descrierea este obligatorie")]
-        [StringLength(2000, MinimumLength = 10, ErrorMessage = "Descrierea trebuie să aibă între 10 și 2000 caractere")]
+        [StringLength(2000, MinimumLength = 10)]
         [Display(Name = "Descriere")]
         public string Description { get; set; } = null!;
 
-        public string CurrentImagePath { get; set; } = null!;
-
         [Display(Name = "Imagine nouă (opțional)")]
         public IFormFile? NewImage { get; set; }
+        
+        public string CurrentImagePath { get; set; } = null!;
 
-        [Required(ErrorMessage = "Prețul este obligatoriu")]
-        [Range(0.01, 1000000, ErrorMessage = "Prețul trebuie să fie mai mare decât 0")]
+        [Required]
+        [Range(0.01, 1_000_000)]
         [Display(Name = "Preț (RON)")]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "Stocul este obligatoriu")]
-        [Range(0, int.MaxValue, ErrorMessage = "Stocul nu poate fi negativ")]
+        [Required]
+        [Range(0, int.MaxValue)]
         [Display(Name = "Stoc")]
         public int Stock { get; set; }
 
-        [Required(ErrorMessage = "Categoria este obligatorie")]
+        [Required]
         [Display(Name = "Categorie")]
         public int CategoryId { get; set; }
 
+        [Required]
+        [Display(Name = "Mărime")]
+        public ProductSize Size { get; set; }
+
+        [Required]
+        [Display(Name = "Culoare")]
+        public int ColorId { get; set; }
+
         public ProductStatus Status { get; set; }
+        
+        [Display(Name = "Feedback Admin")]
+        public string? AdminFeedback { get; set; }
+
+        [Display(Name = "Materiale produs")]
+        public List<ProductMaterialViewModel> Materials { get; set; } = new List<ProductMaterialViewModel>();
     }
 }

@@ -3,104 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\controllers\\wishlistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\controllers\\wishlistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\categories\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\categories\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\categories\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\categories\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\productmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\productmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\wishlists\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\wishlists\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\wishlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\wishlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\categories\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\categories\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\categories\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\categories\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|c:\\users\\maria\\onedrive\\desktop\\facultate\\online-shop\\onlineshop\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA447217-A192-8BF4-EC2D-C552E37492BF}|OnlineShop\\OnlineShop.csproj|solutionrelative:onlineshop\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -110,309 +46,140 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1099,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "SeedData.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Data\\SeedData.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Data\\SeedData.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Data\\SeedData.cs",
-              "RelativeToolTip": "OnlineShop\\Data\\SeedData.cs",
-              "ViewState": "AgIAAK8AAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Products\\Create.cshtml",
+              "RelativeDocumentMoniker": "OnlineShop\\Views\\Products\\Create.cshtml",
+              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Products\\Create.cshtml",
+              "RelativeToolTip": "OnlineShop\\Views\\Products\\Create.cshtml",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAAABIAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-28T11:38:34.058Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductMaterial.cs",
+              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\ProductMaterial.cs",
+              "RelativeDocumentMoniker": "OnlineShop\\Models\\ProductMaterial.cs",
+              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\ProductMaterial.cs",
+              "RelativeToolTip": "OnlineShop\\Models\\ProductMaterial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T18:00:55.908Z",
-              "IsPinned": true
+              "WhenOpened": "2025-12-28T11:48:12.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Products\\Edit.cshtml",
+              "RelativeDocumentMoniker": "OnlineShop\\Views\\Products\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Products\\Edit.cshtml",
+              "RelativeToolTip": "OnlineShop\\Views\\Products\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-28T11:38:39.575Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAOYAAAAAAAAAAAAhwPsAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-14T11:02:37.395Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "OnlineShop\\Controllers\\ProductsController.cs",
-              "ViewState": "AgIAAHQAAAAAAAAAAAApwH0AAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-14T10:55:53.629Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Product.cs",
               "RelativeDocumentMoniker": "OnlineShop\\Models\\Product.cs",
               "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Product.cs",
               "RelativeToolTip": "OnlineShop\\Models\\Product.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAIA9wBQAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAkwDAAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-14T10:55:03.827Z"
+              "WhenOpened": "2025-12-28T11:26:22.727Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ApplicationUser.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\ApplicationUser.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Models\\ApplicationUser.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\ApplicationUser.cs",
-              "RelativeToolTip": "OnlineShop\\Models\\ApplicationUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T18:36:41.375Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\appsettings.json",
-              "RelativeDocumentMoniker": "OnlineShop\\appsettings.json",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\appsettings.json",
-              "RelativeToolTip": "OnlineShop\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-13T18:04:17.644Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 3,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "OnlineShop\\Data\\ApplicationDbContext.cs",
               "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "OnlineShop\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAqwKoAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAowBAAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T18:03:50.085Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "OnlineShop\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIBAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T18:01:53.828Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Account\\Register.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Account\\Register.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Account\\Register.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Account\\Register.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T18:01:35.883Z"
+              "WhenOpened": "2025-12-28T11:23:51.19Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "OnlineShop\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "OnlineShop\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAYwJQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-28T11:12:56.057Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Home\\Details.cshtml",
               "RelativeDocumentMoniker": "OnlineShop\\Views\\Home\\Details.cshtml",
               "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Home\\Details.cshtml",
               "RelativeToolTip": "OnlineShop\\Views\\Home\\Details.cshtml",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAHEAAABTAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAjwJoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:47:57.392Z"
+              "WhenOpened": "2025-12-28T11:10:00.812Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CartController.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\CartController.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Controllers\\CartController.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\CartController.cs",
-              "RelativeToolTip": "OnlineShop\\Controllers\\CartController.cs",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAwwE0AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "Enums.cs",
+              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Enums.cs",
+              "RelativeDocumentMoniker": "OnlineShop\\Models\\Enums.cs",
+              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Enums.cs",
+              "RelativeToolTip": "OnlineShop\\Models\\Enums.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T17:40:26.913Z"
+              "WhenOpened": "2025-12-28T11:08:58.053Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:39:11.495Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "_LoginPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Shared\\_LoginPartial.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Shared\\_LoginPartial.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Shared\\_LoginPartial.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Shared\\_LoginPartial.cshtml",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAvwBsAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:38:30.063Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Wishlists\\Index.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Wishlists\\Index.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Wishlists\\Index.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Wishlists\\Index.cshtml",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAQwEUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:34:37.469Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "WishlistsController.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\WishlistsController.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Controllers\\WishlistsController.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\WishlistsController.cs",
-              "RelativeToolTip": "OnlineShop\\Controllers\\WishlistsController.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAAFcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "OnlineShop\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "OnlineShop\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAYwCcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T17:32:12.068Z"
-            },
+              "WhenOpened": "2025-12-15T12:37:29.823Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1099,
+          "SelectedChildIndex": -1,
+          "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Wishlist.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Wishlist.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Models\\Wishlist.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Wishlist.cs",
-              "RelativeToolTip": "OnlineShop\\Models\\Wishlist.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAwB4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T17:29:59.126Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "WishlistItem.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\WishlistItem.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Models\\WishlistItem.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\WishlistItem.cs",
-              "RelativeToolTip": "OnlineShop\\Models\\WishlistItem.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAwBwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T17:29:49.932Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Delete.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Categories\\Delete.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Delete.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Categories\\Delete.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:23:47.116Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Details.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Categories\\Details.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Details.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Categories\\Details.cshtml",
-              "ViewState": "AgIAAAsAAAAAAAAAAABBwCkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:23:27.318Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Edit.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Categories\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Edit.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Categories\\Edit.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:22:57.492Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Create.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Categories\\Create.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Create.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Categories\\Create.cshtml",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwCMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:22:30.851Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Index.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Categories\\Index.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Categories\\Index.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Categories\\Index.cshtml",
-              "ViewState": "AgIAABcAAAAAAAAAAABBwDUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:22:07.562Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CategoriesController.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\CategoriesController.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Controllers\\CategoriesController.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Controllers\\CategoriesController.cs",
-              "RelativeToolTip": "OnlineShop\\Controllers\\CategoriesController.cs",
-              "ViewState": "AgIAAJcAAAAAAAAAAAAUwLAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T17:20:07.563Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Category.cs",
-              "RelativeDocumentMoniker": "OnlineShop\\Models\\Category.cs",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Models\\Category.cs",
-              "RelativeToolTip": "OnlineShop\\Models\\Category.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAA7wBoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T17:17:50.264Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Orders\\Details.cshtml",
-              "RelativeDocumentMoniker": "OnlineShop\\Views\\Orders\\Details.cshtml",
-              "ToolTip": "C:\\Users\\maria\\OneDrive\\Desktop\\Facultate\\Online-Shop\\OnlineShop\\Views\\Orders\\Details.cshtml",
-              "RelativeToolTip": "OnlineShop\\Views\\Orders\\Details.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAABBwBUAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-13T17:15:16.039Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             }
           ]
         }

@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Models;
+using OnlineShop.Models.Enums;
+
 
 namespace OnlineShop.Controllers
 {
@@ -93,6 +95,8 @@ namespace OnlineShop.Controllers
 
             var product = await _context.Products
                 .Include(p => p.Category)
+                .Include(p => p.Color)
+                .Include(p => p.Materials)
                 .Include(p => p.Reviews)
                     .ThenInclude(r => r.User)
                 .FirstOrDefaultAsync(p =>
@@ -117,8 +121,22 @@ namespace OnlineShop.Controllers
 
             ViewBag.InWishlist = inWishlist;
 
+            // ===== DATE PENTRU SELECT =====
+
+            // Culori (din DB)
+            ViewBag.Colors = await _context.Colors.ToListAsync();
+
+            // Mărimi (din enum)
+            ViewBag.Sizes = Enum.GetValues(typeof(ProductSize))
+                .Cast<ProductSize>()
+                .ToList();
+
+            // Materiale (deja incluse, doar pentru claritate)
+            ViewBag.Materials = product.Materials;
+
             return View(product);
         }
+
 
         // ======================================================
         // Pagini standard

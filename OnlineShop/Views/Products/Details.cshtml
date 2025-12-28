@@ -28,8 +28,29 @@
 </div>
 
 <div class="mb-3">
+    <strong>Culoare:</strong> @Model.Color?.Name
+</div>
+
+<div class="mb-3">
+    <strong>Mărime:</strong> @Model.Size
+</div>
+
+<div class="mb-3">
     <strong>Status:</strong> @Model.Status
 </div>
+
+@if (Model.Materials != null && Model.Materials.Any())
+{
+    <div class="mb-3">
+        <strong>Materiale:</strong>
+        <ul class="mb-0">
+            @foreach (var material in Model.Materials)
+            {
+                <li>@material.Material – @material.Percentage%</li>
+            }
+        </ul>
+    </div>
+}
 
 @if (!string.IsNullOrEmpty(Model.AdminFeedback))
 {
